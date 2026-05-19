@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* ============================================
-   JUMPINGLURY PORTFOLIO - ALL STYLES
-   ============================================ */
 :root {
     --bg-primary: #0a0e17;
     --bg-secondary: #111827;
@@ -34,1250 +31,413 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-*, *::before, *::after {
-    margin: 0;
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:80px; }
+body { font-family:var(--font-main); background-color:var(--bg-primary); color:var(--text-primary); line-height:1.7; overflow-x:hidden; }
+a { text-decoration:none; color:inherit; }
+img, video { max-width:100%; display:block; }
+.container { max-width:1200px; margin:0 auto; padding:0 20px; }
+.highlight { background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+.particle { position:absolute; border-radius:50%; opacity:0.15; animation:floatParticle linear infinite; }
+@keyframes floatParticle { 0%{transform:translateY(100vh) rotate(0deg);opacity:0;} 10%{opacity:0.15;} 90%{opacity:0.15;} 100%{transform:translateY(-10vh) rotate(720deg);opacity:0;} }
+
+.navbar { position:fixed; top:0; left:0; width:100%; z-index:1000; padding:15px 0; transition:var(--transition); }
+.navbar.scrolled { background:rgba(10,14,23,0.95); backdrop-filter:blur(20px); border-bottom:1px solid var(--border-color); padding:10px 0; box-shadow:0 4px 30px rgba(0,0,0,0.3); }
+.nav-container { max-width:1200px; margin:0 auto; padding:0 20px; display:flex; justify-content:space-between; align-items:center; }
+.nav-logo { font-size:1.5rem; font-weight:700; letter-spacing:1px; }
+.logo-bracket { color:var(--accent-primary); font-family:var(--font-code); }
+.nav-links { display:flex; list-style:none; gap:5px; }
+.nav-link { padding:8px 18px; border-radius:var(--radius-xl); font-size:0.9rem; font-weight:500; color:var(--text-secondary); transition:var(--transition); }
+.nav-link:hover, .nav-link.active { color:var(--accent-primary); background:rgba(0,212,255,0.1); }
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:1001; }
+.hamburger span { width:28px; height:3px; background:var(--text-primary); border-radius:3px; transition:var(--transition); }
+.hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(5px,6px); }
+.hamburger.active span:nth-child(2) { opacity:0; }
+.hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(5px,-6px); }
+
+.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:120px 20px 60px; position:relative; z-index:1; }
+.hero-content { max-width:1200px; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+.hero-greeting { font-size:1.1rem; color:var(--accent-primary); font-family:var(--font-code); margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+.typing-prefix { color:var(--accent-secondary); font-size:1.3rem; animation:blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+.hero-name { font-size:4rem; font-weight:800; line-height:1.1; margin-bottom:15px; }
+.name-accent { background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-title { font-size:1.5rem; font-weight:400; color:var(--text-secondary); display:flex; align-items:center; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+.title-dynamic { color:var(--accent-primary); font-weight:600; }
+.cursor { animation:blink 0.8s infinite; color:var(--accent-primary); }
+.hero-description { font-size:1.05rem; color:var(--text-secondary); max-width:520px; margin-bottom:30px; line-height:1.8; }
+.hero-description strong { color:var(--text-primary); }
+.hero-buttons { display:flex; gap:15px; margin-bottom:40px; flex-wrap:wrap; }
+
+.btn { display:inline-flex; align-items:center; gap:10px; padding:14px 32px; border-radius:var(--radius-xl); font-size:0.95rem; font-weight:600; transition:var(--transition); cursor:pointer; border:none; font-family:var(--font-main); }
+.btn-primary { background:var(--accent-gradient); color:#fff; box-shadow:0 4px 15px rgba(0,212,255,0.3); }
+.btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 25px rgba(0,212,255,0.4); }
+.btn-secondary { background:transparent; color:var(--text-primary); border:2px solid var(--border-color); }
+.btn-secondary:hover { border-color:var(--accent-primary); color:var(--accent-primary); transform:translateY(-3px); }
+.btn-full { width:100%; justify-content:center; }
+
+.hero-stats { display:flex; gap:40px; }
+.stat { text-align:center; }
+.stat-number { font-size:2.2rem; font-weight:800; background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.stat-suffix { font-size:1.5rem; font-weight:700; background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.stat-label { display:block; font-size:0.8rem; color:var(--text-muted); font-weight:500; margin-top:2px; }
+
+.hero-visual { display:flex; justify-content:center; }
+.code-window { background:var(--bg-secondary); border-radius:var(--radius-md); border:1px solid var(--border-color); overflow:hidden; width:100%; max-width:500px; box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(0,212,255,0.05); animation:floatCode 6s ease-in-out infinite; }
+@keyframes floatCode { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-15px);} }
+.code-header { display:flex; align-items:center; gap:15px; padding:12px 18px; background:rgba(0,0,0,0.3); border-bottom:1px solid var(--border-color); }
+.code-dots { display:flex; gap:8px; }
+.dot { width:12px; height:12px; border-radius:50%; }
+.dot.red { background:var(--danger); }
+.dot.yellow { background:var(--warning); }
+.dot.green { background:var(--success); }
+.code-filename { font-size:0.8rem; color:var(--text-muted); font-family:var(--font-code); }
+.code-body { padding:20px; font-family:var(--font-code); font-size:0.85rem; line-height:1.8; overflow-x:auto; }
+.lua-keyword { color:#c678dd; } .lua-variable { color:#e06c75; } .lua-key { color:#e5c07b; }
+.lua-string { color:#98c379; } .lua-boolean { color:#d19a66; } .lua-function { color:#61afef; }
+.lua-param { color:#e06c75; } .lua-builtin { color:#61afef; }
+
+.scroll-indicator { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); text-align:center; }
+.mouse { width:26px; height:42px; border:2px solid var(--text-muted); border-radius:20px; margin:0 auto 8px; position:relative; }
+.wheel { width:4px; height:10px; background:var(--accent-primary); border-radius:3px; position:absolute; top:8px; left:50%; transform:translateX(-50%); animation:scrollWheel 2s infinite; }
+@keyframes scrollWheel { 0%{opacity:1;transform:translateX(-50%) translateY(0);} 100%{opacity:0;transform:translateX(-50%) translateY(15px);} }
+.scroll-indicator p { font-size:0.75rem; color:var(--text-muted); letter-spacing:2px; text-transform:uppercase; }
+
+.section { padding:100px 0; position:relative; z-index:1; }
+.section-header { text-align:center; margin-bottom:60px; }
+.section-tag { font-family:var(--font-code); font-size:0.9rem; color:var(--accent-primary); letter-spacing:2px; display:block; margin-bottom:12px; }
+.section-title { font-size:2.5rem; font-weight:800; margin-bottom:15px; }
+.title-underline { width:60px; height:4px; background:var(--accent-gradient); border-radius:2px; margin:0 auto; }
+.section-subtitle { color:var(--text-secondary); font-size:1.05rem; margin-top:15px; }
+
+.about { background:var(--bg-secondary); }
+.about-content { display:grid; grid-template-columns:350px 1fr; gap:60px; align-items:center; }
+.about-image { position:relative; display:flex; justify-content:center; }
+.about-avatar { width:250px; height:250px; border-radius:50%; background:var(--bg-card); display:flex; align-items:center; justify-content:center; position:relative; border:3px solid var(--border-color); }
+.avatar-ring { position:absolute; width:100%; height:100%; border-radius:50%; border:3px dashed var(--accent-primary); animation:spin 20s linear infinite; opacity:0.3; }
+@keyframes spin { 100%{transform:rotate(360deg);} }
+.avatar-icon { font-size:5rem; background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.experience-badge { position:absolute; bottom:-10px; right:20px; background:var(--accent-gradient); width:85px; height:85px; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 5px 20px rgba(0,212,255,0.4); }
+.exp-number { font-size:1.8rem; font-weight:800; line-height:1; }
+.exp-text { font-size:0.65rem; font-weight:600; text-align:center; line-height:1.2; }
+.about-text h3 { font-size:1.6rem; margin-bottom:20px; }
+.about-text p { color:var(--text-secondary); margin-bottom:15px; font-size:0.98rem; }
+.about-text strong { color:var(--accent-primary); }
+.about-details { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin:25px 0 30px; }
+.detail-item { display:flex; align-items:center; gap:12px; color:var(--text-secondary); font-size:0.92rem; }
+.detail-item i { color:var(--accent-primary); width:20px; }
+.detail-item strong { color:var(--text-primary); }
+
+.skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:25px; }
+.skill-card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:30px; transition:var(--transition); position:relative; overflow:hidden; }
+.skill-card::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background:var(--accent-gradient); transform:scaleX(0); transform-origin:left; transition:var(--transition); }
+.skill-card:hover { transform:translateY(-5px); border-color:rgba(0,212,255,0.3); box-shadow:0 10px 40px rgba(0,0,0,0.3); }
+.skill-card:hover::before { transform:scaleX(1); }
+.skill-icon { width:55px; height:55px; border-radius:var(--radius-sm); background:rgba(0,212,255,0.1); display:flex; align-items:center; justify-content:center; margin-bottom:18px; font-size:1.4rem; color:var(--accent-primary); transition:var(--transition); }
+.skill-card:hover .skill-icon { background:var(--accent-gradient); color:#fff; }
+.skill-card h3 { font-size:1.1rem; margin-bottom:10px; font-weight:600; }
+.skill-card p { font-size:0.88rem; color:var(--text-secondary); margin-bottom:18px; line-height:1.6; }
+.skill-bar { background:rgba(255,255,255,0.08); border-radius:10px; height:10px; overflow:hidden; }
+.skill-fill { height:100%; background:var(--accent-gradient); border-radius:10px; width:0; transition:width 1.5s ease; position:relative; }
+.skill-fill span { position:absolute; top:-25px; right:0; font-size:0.75rem; font-weight:600; color:var(--accent-primary); }
+
+.portfolio { background:var(--bg-secondary); }
+.portfolio-filters { display:flex; justify-content:center; gap:10px; margin-bottom:40px; flex-wrap:wrap; }
+.filter-btn { padding:10px 24px; border:2px solid var(--border-color); background:transparent; color:var(--text-secondary); border-radius:var(--radius-xl); font-family:var(--font-main); font-size:0.9rem; font-weight:500; cursor:pointer; transition:var(--transition); }
+.filter-btn:hover, .filter-btn.active { border-color:var(--accent-primary); color:var(--accent-primary); background:rgba(0,212,255,0.1); }
+.portfolio-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:25px; }
+.portfolio-item { transition:var(--transition); }
+.portfolio-item.hidden { display:none; }
+.portfolio-card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); overflow:hidden; transition:var(--transition); }
+.portfolio-card:hover { transform:translateY(-8px); box-shadow:0 20px 50px rgba(0,0,0,0.4); border-color:rgba(0,212,255,0.3); }
+.video-wrapper { position:relative; width:100%; padding-bottom:56.25%; height:0; overflow:hidden; background:#000; }
+.video-wrapper iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:none; }
+.portfolio-media { position:relative; background:#000; }
+.portfolio-badge { position:absolute; top:12px; left:12px; background:var(--accent-gradient); color:#fff; padding:4px 12px; border-radius:var(--radius-xl); font-size:0.7rem; font-weight:600; z-index:10; pointer-events:none; }
+.portfolio-info { padding:22px; }
+.portfolio-info h3 { font-size:1.15rem; margin-bottom:8px; font-weight:600; }
+.portfolio-info p { font-size:0.88rem; color:var(--text-secondary); margin-bottom:15px; line-height:1.5; }
+.portfolio-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.portfolio-tags span { padding:4px 12px; background:rgba(0,212,255,0.1); color:var(--accent-primary); border-radius:var(--radius-xl); font-size:0.75rem; font-weight:500; border:1px solid rgba(0,212,255,0.2); }
+
+.coming-soon-card { border-style:dashed !important; }
+.coming-soon-media { display:flex; align-items:center; justify-content:center; min-height:200px; background:linear-gradient(135deg,rgba(0,212,255,0.03),rgba(124,58,237,0.03)); }
+.coming-soon-content { text-align:center; padding:30px; }
+.coming-soon-content i { font-size:3rem; background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:15px; opacity:0.5; display:block; }
+.coming-soon-content h4 { font-size:1.1rem; color:var(--text-secondary); margin-bottom:5px; }
+.coming-soon-content p { font-size:0.85rem; color:var(--text-muted); }
+.coming-soon-card:hover { border-color:rgba(0,212,255,0.3) !important; }
+.coming-soon-card:hover .coming-soon-content i { opacity:1; }
+
+.video-showcase-section { margin-top:70px; text-align:center; }
+.showcase-title { font-size:1.6rem; font-weight:700; margin-bottom:8px; }
+.showcase-title i { background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-right:10px; }
+.showcase-subtitle { color:var(--text-secondary); font-size:0.95rem; margin-bottom:35px; }
+.showcase-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:25px; }
+.showcase-card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); overflow:hidden; transition:var(--transition); }
+.showcase-card:hover { transform:translateY(-5px); border-color:rgba(0,212,255,0.3); box-shadow:0 15px 40px rgba(0,0,0,0.4); }
+.showcase-info { padding:18px 22px; text-align:left; }
+.showcase-info h4 { font-size:1.05rem; font-weight:600; margin-bottom:5px; }
+.showcase-info p { font-size:0.85rem; color:var(--text-secondary); }
+
+/* Sale Banner */
+.sale-banner {
+    background: linear-gradient(135deg, #ff6b35, #ff2d55, #7c3aed);
     padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px;
-}
-
-body {
-    font-family: var(--font-main);
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    line-height: 1.7;
-    overflow-x: hidden;
-}
-
-a { text-decoration: none; color: inherit; }
-img, video { max-width: 100%; display: block; }
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.highlight {
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Particles */
-#particles {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.particle {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.15;
-    animation: floatParticle linear infinite;
-}
-
-@keyframes floatParticle {
-    0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-    10%  { opacity: 0.15; }
-    90%  { opacity: 0.15; }
-    100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
-}
-
-/* Navbar */
-.navbar {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 15px 0;
-    transition: var(--transition);
-}
-
-.navbar.scrolled {
-    background: rgba(10, 14, 23, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-color);
-    padding: 10px 0;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-.logo-bracket {
-    color: var(--accent-primary);
-    font-family: var(--font-code);
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 5px;
-}
-
-.nav-link {
-    padding: 8px 18px;
-    border-radius: var(--radius-xl);
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    transition: var(--transition);
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--accent-primary);
-    background: rgba(0, 212, 255, 0.1);
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.hamburger span {
-    width: 28px; height: 3px;
-    background: var(--text-primary);
-    border-radius: 3px;
-    transition: var(--transition);
-}
-
-.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,6px); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-6px); }
-
-/* Hero */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 120px 20px 60px;
     position: relative;
     z-index: 1;
-}
-
-.hero-content {
-    max-width: 1200px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-}
-
-.hero-greeting {
-    font-size: 1.1rem;
-    color: var(--accent-primary);
-    font-family: var(--font-code);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.typing-prefix {
-    color: var(--accent-secondary);
-    font-size: 1.3rem;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0; }
-}
-
-.hero-name {
-    font-size: 4rem;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 15px;
-}
-
-.name-accent {
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-title {
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.title-dynamic { color: var(--accent-primary); font-weight: 600; }
-.cursor { animation: blink 0.8s infinite; color: var(--accent-primary); }
-
-.hero-description {
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-    max-width: 520px;
-    margin-bottom: 30px;
-    line-height: 1.8;
-}
-
-.hero-description strong { color: var(--text-primary); }
-
-.hero-buttons {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    border-radius: var(--radius-xl);
-    font-size: 0.95rem;
-    font-weight: 600;
-    transition: var(--transition);
-    cursor: pointer;
-    border: none;
-    font-family: var(--font-main);
-}
-
-.btn-primary {
-    background: var(--accent-gradient);
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(0,212,255,0.3);
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,212,255,0.4);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--text-primary);
-    border: 2px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-    border-color: var(--accent-primary);
-    color: var(--accent-primary);
-    transform: translateY(-3px);
-}
-
-.btn-full { width: 100%; justify-content: center; }
-
-.hero-stats { display: flex; gap: 40px; }
-.stat { text-align: center; }
-
-.stat-number {
-    font-size: 2.2rem;
-    font-weight: 800;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.stat-suffix {
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.stat-label {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    margin-top: 2px;
-}
-
-.hero-visual { display: flex; justify-content: center; }
-
-.code-window {
-    background: var(--bg-secondary);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    overflow: hidden;
-    width: 100%;
-    max-width: 500px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,212,255,0.05);
-    animation: floatCode 6s ease-in-out infinite;
-}
-
-@keyframes floatCode {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-15px); }
-}
-
-.code-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 12px 18px;
-    background: rgba(0,0,0,0.3);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.code-dots { display: flex; gap: 8px; }
-.dot { width: 12px; height: 12px; border-radius: 50%; }
-.dot.red    { background: var(--danger); }
-.dot.yellow { background: var(--warning); }
-.dot.green  { background: var(--success); }
-
-.code-filename {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-family: var(--font-code);
-}
-
-.code-body {
-    padding: 20px;
-    font-family: var(--font-code);
-    font-size: 0.85rem;
-    line-height: 1.8;
-    overflow-x: auto;
-}
-
-.lua-keyword  { color: #c678dd; }
-.lua-variable { color: #e06c75; }
-.lua-key      { color: #e5c07b; }
-.lua-string   { color: #98c379; }
-.lua-boolean  { color: #d19a66; }
-.lua-function { color: #61afef; }
-.lua-param    { color: #e06c75; }
-.lua-builtin  { color: #61afef; }
-
-.scroll-indicator {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-}
-
-.mouse {
-    width: 26px; height: 42px;
-    border: 2px solid var(--text-muted);
-    border-radius: 20px;
-    margin: 0 auto 8px;
-    position: relative;
-}
-
-.wheel {
-    width: 4px; height: 10px;
-    background: var(--accent-primary);
-    border-radius: 3px;
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: scrollWheel 2s infinite;
-}
-
-@keyframes scrollWheel {
-    0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(15px); }
-}
-
-.scroll-indicator p {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-/* Sections */
-.section {
-    padding: 100px 0;
-    position: relative;
-    z-index: 1;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.section-tag {
-    font-family: var(--font-code);
-    font-size: 0.9rem;
-    color: var(--accent-primary);
-    letter-spacing: 2px;
-    display: block;
-    margin-bottom: 12px;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 15px;
-}
-
-.title-underline {
-    width: 60px; height: 4px;
-    background: var(--accent-gradient);
-    border-radius: 2px;
-    margin: 0 auto;
-}
-
-.section-subtitle {
-    color: var(--text-secondary);
-    font-size: 1.05rem;
-    margin-top: 15px;
-}
-
-/* About */
-.about { background: var(--bg-secondary); }
-
-.about-content {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 60px;
-    align-items: center;
-}
-
-.about-image {
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.about-avatar {
-    width: 250px; height: 250px;
-    border-radius: 50%;
-    background: var(--bg-card);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border: 3px solid var(--border-color);
-}
-
-.avatar-ring {
-    position: absolute;
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    border: 3px dashed var(--accent-primary);
-    animation: spin 20s linear infinite;
-    opacity: 0.3;
-}
-
-@keyframes spin { 100% { transform: rotate(360deg); } }
-
-.avatar-icon {
-    font-size: 5rem;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.experience-badge {
-    position: absolute;
-    bottom: -10px; right: 20px;
-    background: var(--accent-gradient);
-    width: 85px; height: 85px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 5px 20px rgba(0,212,255,0.4);
-}
-
-.exp-number { font-size: 1.8rem; font-weight: 800; line-height: 1; }
-.exp-text   { font-size: 0.65rem; font-weight: 600; text-align: center; line-height: 1.2; }
-
-.about-text h3 { font-size: 1.6rem; margin-bottom: 20px; }
-.about-text p  { color: var(--text-secondary); margin-bottom: 15px; font-size: 0.98rem; }
-.about-text strong { color: var(--accent-primary); }
-
-.about-details {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin: 25px 0 30px;
-}
-
-.detail-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--text-secondary);
-    font-size: 0.92rem;
-}
-
-.detail-item i { color: var(--accent-primary); width: 20px; }
-.detail-item strong { color: var(--text-primary); }
-
-/* Skills */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
-
-.skill-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 30px;
-    transition: var(--transition);
-    position: relative;
     overflow: hidden;
 }
-
-.skill-card::before {
+.sale-banner::before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 3px;
-    background: var(--accent-gradient);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: var(--transition);
+    top: 0; left: -100%;
+    width: 200%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: saleShine 3s infinite;
 }
-
-.skill-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(0,212,255,0.3);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-}
-
-.skill-card:hover::before { transform: scaleX(1); }
-
-.skill-icon {
-    width: 55px; height: 55px;
-    border-radius: var(--radius-sm);
-    background: rgba(0,212,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
-    font-size: 1.4rem;
-    color: var(--accent-primary);
-    transition: var(--transition);
-}
-
-.skill-card:hover .skill-icon {
-    background: var(--accent-gradient);
-    color: #fff;
-}
-
-.skill-card h3 { font-size: 1.1rem; margin-bottom: 10px; font-weight: 600; }
-.skill-card p  { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 18px; line-height: 1.6; }
-
-.skill-bar {
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    height: 10px;
-    overflow: hidden;
-}
-
-.skill-fill {
-    height: 100%;
-    background: var(--accent-gradient);
-    border-radius: 10px;
-    width: 0;
-    transition: width 1.5s ease;
-    position: relative;
-}
-
-.skill-fill span {
-    position: absolute;
-    top: -25px; right: 0;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--accent-primary);
-}
-
-/* Portfolio */
-.portfolio { background: var(--bg-secondary); }
-
-.portfolio-filters {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    padding: 10px 24px;
-    border: 2px solid var(--border-color);
-    background: transparent;
-    color: var(--text-secondary);
-    border-radius: var(--radius-xl);
-    font-family: var(--font-main);
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    border-color: var(--accent-primary);
-    color: var(--accent-primary);
-    background: rgba(0,212,255,0.1);
-}
-
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
-
-.portfolio-item { transition: var(--transition); }
-.portfolio-item.hidden { display: none; }
-
-.portfolio-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    transition: var(--transition);
-}
-
-.portfolio-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-    border-color: rgba(0,212,255,0.3);
-}
-
-.video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    background: #000;
-}
-
-.video-wrapper iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    border: none;
-}
-
-.portfolio-media {
-    position: relative;
-    background: #000;
-}
-
-.portfolio-badge {
-    position: absolute;
-    top: 12px; left: 12px;
-    background: var(--accent-gradient);
-    color: #fff;
-    padding: 4px 12px;
-    border-radius: var(--radius-xl);
-    font-size: 0.7rem;
-    font-weight: 600;
-    z-index: 10;
-    pointer-events: none;
-}
-
-.portfolio-info { padding: 22px; }
-.portfolio-info h3 { font-size: 1.15rem; margin-bottom: 8px; font-weight: 600; }
-.portfolio-info p  { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 15px; line-height: 1.5; }
-
-.portfolio-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-
-.portfolio-tags span {
-    padding: 4px 12px;
-    background: rgba(0,212,255,0.1);
-    color: var(--accent-primary);
-    border-radius: var(--radius-xl);
-    font-size: 0.75rem;
-    font-weight: 500;
-    border: 1px solid rgba(0,212,255,0.2);
-}
-
-.coming-soon-card { border-style: dashed !important; }
-
-.coming-soon-media {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-    background: linear-gradient(135deg, rgba(0,212,255,0.03), rgba(124,58,237,0.03));
-}
-
-.coming-soon-content { text-align: center; padding: 30px; }
-
-.coming-soon-content i {
-    font-size: 3rem;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 15px;
-    opacity: 0.5;
-    display: block;
-}
-
-.coming-soon-content h4 { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 5px; }
-.coming-soon-content p  { font-size: 0.85rem; color: var(--text-muted); }
-.coming-soon-card:hover { border-color: rgba(0,212,255,0.3) !important; }
-.coming-soon-card:hover .coming-soon-content i { opacity: 1; }
-
-.video-showcase-section {
-    margin-top: 70px;
+@keyframes saleShine { 0%{left:-100%;} 100%{left:100%;} }
+.sale-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
     text-align: center;
+    position: relative;
 }
-
-.showcase-title {
-    font-size: 1.6rem;
+.sale-tag {
+    display: inline-block;
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    padding: 6px 20px;
+    border-radius: var(--radius-xl);
+    font-size: 0.85rem;
     font-weight: 700;
-    margin-bottom: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    animation: pulse 2s infinite;
 }
-
-.showcase-title i {
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-right: 10px;
-}
-
-.showcase-subtitle {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    margin-bottom: 35px;
-}
-
-.showcase-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-}
-
-.showcase-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    transition: var(--transition);
-}
-
-.showcase-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(0,212,255,0.3);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-}
-
-.showcase-info { padding: 18px 22px; text-align: left; }
-.showcase-info h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 5px; }
-.showcase-info p  { font-size: 0.85rem; color: var(--text-secondary); }
+@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
+.sale-inner h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
+.sale-inner h2 span { color: #ffd700; }
+.sale-price-display { display:flex; justify-content:center; align-items:center; gap:20px; margin:20px 0; flex-wrap:wrap; }
+.sale-old-price { font-size:1.3rem; color:rgba(255,255,255,0.5); text-decoration:line-through; }
+.sale-arrow { font-size:1.5rem; }
+.sale-new-price { font-size:2.5rem; font-weight:800; color:#ffd700; text-shadow:0 0 20px rgba(255,215,0,0.5); }
+.sale-desc { color:rgba(255,255,255,0.8); font-size:1rem; margin-bottom:20px; }
+.sale-includes { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:25px; }
+.sale-item { background:rgba(0,0,0,0.2); padding:8px 18px; border-radius:var(--radius-xl); font-size:0.85rem; font-weight:500; }
+.sale-btn { display:inline-flex; align-items:center; gap:10px; padding:16px 40px; background:#ffd700; color:#000; border-radius:var(--radius-xl); font-size:1.1rem; font-weight:700; transition:var(--transition); border:none; cursor:pointer; font-family:var(--font-main); }
+.sale-btn:hover { transform:translateY(-3px) scale(1.05); box-shadow:0 10px 30px rgba(255,215,0,0.4); }
 
 /* Services */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-}
+.services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:25px; }
+.service-card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:35px 25px; text-align:center; transition:var(--transition); position:relative; }
+.service-card:hover { transform:translateY(-8px); border-color:rgba(0,212,255,0.3); box-shadow:0 15px 40px rgba(0,0,0,0.3); }
+.service-card.featured { border-color:var(--accent-primary); background:linear-gradient(180deg,rgba(0,212,255,0.05),var(--bg-card)); }
+.service-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--accent-gradient); color:#fff; padding:4px 18px; border-radius:var(--radius-xl); font-size:0.75rem; font-weight:600; }
+.service-icon { width:70px; height:70px; border-radius:50%; background:rgba(0,212,255,0.1); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:1.6rem; color:var(--accent-primary); transition:var(--transition); }
+.service-card:hover .service-icon { background:var(--accent-gradient); color:#fff; transform:scale(1.1); }
+.service-card h3 { font-size:1.1rem; margin-bottom:12px; font-weight:600; }
+.service-card p { font-size:0.88rem; color:var(--text-secondary); margin-bottom:20px; line-height:1.6; }
+.service-price { font-size:0.9rem; color:var(--accent-primary); padding-top:15px; border-top:1px solid var(--border-color); }
+.service-price strong { font-size:1.1rem; }
+.price-robux { display:block; font-size:0.85rem; color:var(--success); margin-top:4px; font-weight:600; }
+.services-note { margin-top:40px; background:var(--bg-card); border:1px solid var(--border-color); border-left:4px solid var(--accent-primary); border-radius:var(--radius-sm); padding:20px 25px; display:flex; align-items:flex-start; gap:15px; }
+.services-note i { color:var(--accent-primary); font-size:1.2rem; margin-top:3px; }
+.services-note p { color:var(--text-secondary); font-size:0.92rem; }
+.services-note strong { color:var(--text-primary); }
 
-.service-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 35px 25px;
-    text-align: center;
-    transition: var(--transition);
-    position: relative;
-}
+/* Reviews */
+.reviews { background:var(--bg-primary); }
+.reviews-list { display:grid; grid-template-columns:repeat(3,1fr); gap:25px; margin-bottom:40px; }
+.review-card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:25px; transition:var(--transition); }
+.review-card:hover { transform:translateY(-5px); border-color:rgba(0,212,255,0.3); box-shadow:0 10px 30px rgba(0,0,0,0.3); }
+.review-stars { color:var(--warning); margin-bottom:12px; font-size:1rem; }
+.review-text { font-size:0.92rem; color:var(--text-secondary); font-style:italic; margin-bottom:15px; line-height:1.6; }
+.review-author { display:flex; align-items:center; gap:10px; }
+.review-avatar { width:40px; height:40px; border-radius:50%; background:var(--accent-gradient); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; flex-shrink:0; }
+.review-author-info strong { display:block; font-size:0.9rem; }
+.review-author-info span { font-size:0.75rem; color:var(--text-muted); }
+.review-date { font-size:0.7rem; color:var(--text-muted); margin-top:10px; }
+.no-reviews { text-align:center; color:var(--text-muted); font-size:0.95rem; padding:40px; grid-column:1/-1; }
 
-.service-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(0,212,255,0.3);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-}
-
-.service-card.featured {
-    border-color: var(--accent-primary);
-    background: linear-gradient(180deg, rgba(0,212,255,0.05), var(--bg-card));
-}
-
-.service-badge {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--accent-gradient);
-    color: #fff;
-    padding: 4px 18px;
-    border-radius: var(--radius-xl);
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.service-icon {
-    width: 70px; height: 70px;
-    border-radius: 50%;
-    background: rgba(0,212,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 1.6rem;
-    color: var(--accent-primary);
-    transition: var(--transition);
-}
-
-.service-card:hover .service-icon {
-    background: var(--accent-gradient);
-    color: #fff;
-    transform: scale(1.1);
-}
-
-.service-card h3 { font-size: 1.1rem; margin-bottom: 12px; font-weight: 600; }
-.service-card p  { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
-
-.service-price {
-    font-size: 0.9rem;
-    color: var(--accent-primary);
-    padding-top: 15px;
-    border-top: 1px solid var(--border-color);
-}
-
-.service-price strong { font-size: 1.1rem; }
-
-.services-note {
-    margin-top: 40px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--accent-primary);
-    border-radius: var(--radius-sm);
-    padding: 20px 25px;
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-}
-
-.services-note i { color: var(--accent-primary); font-size: 1.2rem; margin-top: 3px; }
-.services-note p { color: var(--text-secondary); font-size: 0.92rem; }
-.services-note strong { color: var(--text-primary); }
-
-/* Testimonials */
-.testimonials { background: var(--bg-primary); }
-
-.testimonials-slider {
-    max-width: 650px;
-    margin: 0 auto;
-    position: relative;
-    min-height: 250px;
-}
-
-.testimonial-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 35px;
-    text-align: center;
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    opacity: 0;
-    transform: translateX(50px);
-    transition: all 0.5s ease;
-    pointer-events: none;
-}
-
-.testimonial-card.active {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: all;
-    position: relative;
-}
-
-.stars { margin-bottom: 15px; color: var(--warning); font-size: 1.1rem; }
-.stars i { margin: 0 2px; }
-
-.testimonial-card > p {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    font-style: italic;
-    margin-bottom: 20px;
-    line-height: 1.7;
-}
-
-.testimonial-author {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-}
-
-.author-avatar {
-    width: 45px; height: 45px;
-    border-radius: 50%;
-    background: var(--accent-gradient);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.85rem;
-}
-
-.testimonial-author strong { display: block; font-size: 0.95rem; }
-.testimonial-author span  { font-size: 0.8rem; color: var(--text-muted); }
-
-.slider-dots {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 25px;
-}
-
-.slider-dots .dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    border: 2px solid var(--text-muted);
-    background: transparent;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.slider-dots .dot.active {
-    background: var(--accent-primary);
-    border-color: var(--accent-primary);
-}
+.review-form-container { max-width:600px; margin:0 auto; }
+.review-form-container h3 { text-align:center; font-size:1.3rem; margin-bottom:20px; }
+.review-form { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:30px; }
+.review-form .form-group { margin-bottom:18px; }
+.review-form label { font-size:0.85rem; font-weight:600; margin-bottom:8px; color:var(--text-secondary); display:block; }
+.review-form input, .review-form textarea, .review-form select { width:100%; padding:12px 16px; background:var(--bg-primary); border:2px solid var(--border-color); border-radius:var(--radius-sm); color:var(--text-primary); font-family:var(--font-main); font-size:0.9rem; transition:var(--transition); outline:none; }
+.review-form input:focus, .review-form textarea:focus { border-color:var(--accent-primary); box-shadow:0 0 0 3px rgba(0,212,255,0.1); }
+.review-form input::placeholder, .review-form textarea::placeholder { color:var(--text-muted); }
+.star-rating { display:flex; gap:5px; margin-top:5px; }
+.star-rating i { font-size:1.5rem; color:var(--border-color); cursor:pointer; transition:var(--transition); }
+.star-rating i.active, .star-rating i:hover { color:var(--warning); }
+.review-success { display:none; text-align:center; padding:30px; }
+.review-success i { font-size:3rem; color:var(--success); margin-bottom:15px; display:block; }
+.review-success h4 { font-size:1.2rem; margin-bottom:8px; }
+.review-success p { color:var(--text-secondary); font-size:0.9rem; }
+.review-pending-note { text-align:center; margin-top:15px; padding:12px; background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:var(--radius-sm); color:var(--warning); font-size:0.85rem; }
 
 /* Contact */
-.contact { background: var(--bg-secondary); }
+.contact { background:var(--bg-secondary); }
+.contact-content { display:grid; grid-template-columns:1fr 1.3fr; gap:50px; }
+.contact-info h3 { font-size:1.5rem; margin-bottom:15px; }
+.contact-info > p { color:var(--text-secondary); margin-bottom:30px; font-size:0.95rem; }
+.contact-methods { display:flex; flex-direction:column; gap:20px; }
+.contact-method { display:flex; align-items:center; gap:15px; padding:15px; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-sm); transition:var(--transition); }
+.contact-method:hover { border-color:rgba(0,212,255,0.3); transform:translateX(5px); }
+.method-icon { width:45px; height:45px; border-radius:var(--radius-sm); background:rgba(0,212,255,0.1); display:flex; align-items:center; justify-content:center; font-size:1.2rem; color:var(--accent-primary); flex-shrink:0; }
+.contact-method strong { display:block; font-size:0.9rem; }
+.contact-method p { font-size:0.85rem; color:var(--text-muted); margin:0; }
+.discord-big-btn { display:flex; align-items:center; justify-content:center; gap:15px; width:100%; padding:20px; margin-top:20px; background:#5865F2; color:#fff; border-radius:var(--radius-md); font-size:1.1rem; font-weight:700; transition:var(--transition); border:2px solid transparent; }
+.discord-big-btn:hover { transform:translateY(-3px); box-shadow:0 8px 30px rgba(88,101,242,0.4); background:#4752C4; }
+.discord-big-btn i { font-size:1.5rem; }
 
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    gap: 50px;
-}
+.contact-form { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.form-group { display:flex; flex-direction:column; }
+.form-group.full-width { grid-column:1/-1; }
+.form-group label { font-size:0.85rem; font-weight:600; margin-bottom:8px; color:var(--text-secondary); }
+.form-group input, .form-group select, .form-group textarea { padding:14px 18px; background:var(--bg-card); border:2px solid var(--border-color); border-radius:var(--radius-sm); color:var(--text-primary); font-family:var(--font-main); font-size:0.92rem; transition:var(--transition); outline:none; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--accent-primary); box-shadow:0 0 0 3px rgba(0,212,255,0.1); }
+.form-group input::placeholder, .form-group textarea::placeholder { color:var(--text-muted); }
+.form-group select { cursor:pointer; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 15px center; }
+.form-group select option { background:var(--bg-card); color:var(--text-primary); }
+.contact-form .btn { grid-column:1/-1; margin-top:10px; padding:16px; font-size:1rem; }
 
-.contact-info h3 { font-size: 1.5rem; margin-bottom: 15px; }
-.contact-info > p { color: var(--text-secondary); margin-bottom: 30px; font-size: 0.95rem; }
-
-.contact-methods { display: flex; flex-direction: column; gap: 20px; }
-
-.contact-method {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
-}
-
-.contact-method:hover {
-    border-color: rgba(0,212,255,0.3);
-    transform: translateX(5px);
-}
-
-.method-icon {
-    width: 45px; height: 45px;
-    border-radius: var(--radius-sm);
-    background: rgba(0,212,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    color: var(--accent-primary);
-    flex-shrink: 0;
-}
-
-.contact-method strong { display: block; font-size: 0.9rem; }
-.contact-method p      { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
-
-.contact-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.form-group { display: flex; flex-direction: column; }
-.form-group.full-width { grid-column: 1 / -1; }
-
-.form-group label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: var(--text-secondary);
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    padding: 14px 18px;
-    background: var(--bg-card);
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    color: var(--text-primary);
-    font-family: var(--font-main);
-    font-size: 0.92rem;
-    transition: var(--transition);
-    outline: none;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder { color: var(--text-muted); }
-
-.form-group select {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-}
-
-.form-group select option { background: var(--bg-card); color: var(--text-primary); }
-
-.contact-form .btn { grid-column: 1 / -1; margin-top: 10px; padding: 16px; font-size: 1rem; }
+/* Admin */
+.admin-panel { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:10000; overflow-y:auto; padding:20px; }
+.admin-panel.active { display:block; }
+.admin-container { max-width:800px; margin:0 auto; padding:20px; }
+.admin-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; }
+.admin-header h2 { font-size:1.5rem; }
+.admin-close { background:none; border:none; color:#fff; font-size:2rem; cursor:pointer; }
+.admin-close:hover { color:var(--danger); }
+.admin-review { background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:20px; margin-bottom:15px; }
+.admin-review-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.admin-review-text { color:var(--text-secondary); font-style:italic; margin-bottom:15px; }
+.admin-btns { display:flex; gap:10px; }
+.admin-btn { padding:8px 20px; border:none; border-radius:var(--radius-sm); font-family:var(--font-main); font-size:0.85rem; font-weight:600; cursor:pointer; transition:var(--transition); }
+.admin-approve { background:var(--success); color:#fff; }
+.admin-approve:hover { background:#059669; }
+.admin-reject { background:var(--danger); color:#fff; }
+.admin-reject:hover { background:#dc2626; }
+.admin-empty { text-align:center; color:var(--text-muted); padding:40px; }
+.admin-login { max-width:400px; margin:100px auto; background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:40px; text-align:center; }
+.admin-login h3 { margin-bottom:20px; }
+.admin-login input { width:100%; padding:14px; background:var(--bg-primary); border:2px solid var(--border-color); border-radius:var(--radius-sm); color:var(--text-primary); font-family:var(--font-main); font-size:1rem; margin-bottom:15px; outline:none; text-align:center; }
+.admin-login input:focus { border-color:var(--accent-primary); }
+.admin-login .btn { width:100%; }
+.admin-error { color:var(--danger); font-size:0.85rem; margin-top:10px; display:none; }
 
 /* Footer */
-.footer {
-    background: var(--bg-primary);
-    border-top: 1px solid var(--border-color);
-    padding: 50px 0 25px;
-    position: relative;
-    z-index: 1;
+.footer { background:var(--bg-primary); border-top:1px solid var(--border-color); padding:50px 0 25px; position:relative; z-index:1; }
+.footer-content { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:30px; margin-bottom:30px; }
+.footer-brand h3 { font-size:1.4rem; margin-bottom:5px; }
+.footer-brand p { color:var(--text-muted); font-size:0.85rem; }
+.footer-links { display:flex; gap:25px; }
+.footer-links a { color:var(--text-secondary); font-size:0.9rem; transition:var(--transition); }
+.footer-links a:hover { color:var(--accent-primary); }
+.footer-social { display:flex; gap:12px; }
+.social-link { width:42px; height:42px; border-radius:50%; border:2px solid var(--border-color); display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--text-secondary); transition:var(--transition); }
+.social-link:hover { border-color:var(--accent-primary); color:var(--accent-primary); background:rgba(0,212,255,0.1); transform:translateY(-3px); }
+.footer-bottom { text-align:center; padding-top:25px; border-top:1px solid var(--border-color); }
+.footer-bottom p { font-size:0.85rem; color:var(--text-muted); }
+.admin-trigger { cursor:pointer; }
+
+.fade-in { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+@media (max-width:1024px) {
+    .hero-content { grid-template-columns:1fr; text-align:center; gap:40px; }
+    .hero-description { margin:0 auto 30px; }
+    .hero-buttons { justify-content:center; }
+    .hero-stats { justify-content:center; }
+    .skills-grid { grid-template-columns:repeat(2,1fr); }
+    .portfolio-grid { grid-template-columns:repeat(2,1fr); }
+    .services-grid { grid-template-columns:repeat(2,1fr); }
+    .about-content { grid-template-columns:1fr; text-align:center; }
+    .about-details { justify-items:center; }
+    .contact-content { grid-template-columns:1fr; }
+    .reviews-list { grid-template-columns:repeat(2,1fr); }
 }
 
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin-bottom: 30px;
+@media (max-width:768px) {
+    .nav-links { position:fixed; top:0; right:-100%; width:280px; height:100vh; background:var(--bg-secondary); flex-direction:column; padding:80px 30px 30px; transition:var(--transition); border-left:1px solid var(--border-color); gap:5px; }
+    .nav-links.active { right:0; }
+    .hamburger { display:flex; }
+    .hero-name { font-size:2.8rem; }
+    .section-title { font-size:2rem; }
+    .skills-grid,.portfolio-grid,.showcase-grid,.services-grid,.reviews-list { grid-template-columns:1fr; }
+    .about-details { grid-template-columns:1fr; }
+    .contact-form { grid-template-columns:1fr; }
+    .footer-content { flex-direction:column; text-align:center; }
+    .code-body { font-size:0.75rem; }
+    .sale-inner h2 { font-size:1.6rem; }
+    .sale-new-price { font-size:2rem; }
 }
 
-.footer-brand h3 { font-size: 1.4rem; margin-bottom: 5px; }
-.footer-brand p  { color: var(--text-muted); font-size: 0.85rem; }
-
-.footer-links { display: flex; gap: 25px; }
-.footer-links a { color: var(--text-secondary); font-size: 0.9rem; transition: var(--transition); }
-.footer-links a:hover { color: var(--accent-primary); }
-
-.footer-social { display: flex; gap: 12px; }
-
-.social-link {
-    width: 42px; height: 42px;
-    border-radius: 50%;
-    border: 2px solid var(--border-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    color: var(--text-secondary);
-    transition: var(--transition);
-}
-
-.social-link:hover {
-    border-color: var(--accent-primary);
-    color: var(--accent-primary);
-    background: rgba(0,212,255,0.1);
-    transform: translateY(-3px);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 25px;
-    border-top: 1px solid var(--border-color);
-}
-
-.footer-bottom p { font-size: 0.85rem; color: var(--text-muted); }
-
-/* Animations */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.7s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .hero-content { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-    .hero-description { margin: 0 auto 30px; }
-    .hero-buttons { justify-content: center; }
-    .hero-stats { justify-content: center; }
-    .skills-grid { grid-template-columns: repeat(2, 1fr); }
-    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
-    .services-grid { grid-template-columns: repeat(2, 1fr); }
-    .about-content { grid-template-columns: 1fr; text-align: center; }
-    .about-details { justify-items: center; }
-    .contact-content { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        position: fixed;
-        top: 0; right: -100%;
-        width: 280px; height: 100vh;
-        background: var(--bg-secondary);
-        flex-direction: column;
-        padding: 80px 30px 30px;
-        transition: var(--transition);
-        border-left: 1px solid var(--border-color);
-        gap: 5px;
-    }
-    .nav-links.active { right: 0; }
-    .hamburger { display: flex; }
-    .hero-name { font-size: 2.8rem; }
-    .hero-title { font-size: 1.2rem; }
-    .section-title { font-size: 2rem; }
-    .skills-grid, .portfolio-grid, .showcase-grid, .services-grid { grid-template-columns: 1fr; }
-    .about-details { grid-template-columns: 1fr; }
-    .contact-form { grid-template-columns: 1fr; }
-    .footer-content { flex-direction: column; text-align: center; }
-    .code-window { max-width: 100%; }
-    .code-body { font-size: 0.75rem; }
-}
-
-@media (max-width: 480px) {
-    .hero-name { font-size: 2.2rem; }
-    .hero-buttons { flex-direction: column; }
-    .btn { width: 100%; justify-content: center; }
-    .hero-stats { flex-wrap: wrap; gap: 20px; }
-    .section { padding: 70px 0; }
-    .filter-btn { padding: 8px 16px; font-size: 0.8rem; }
+@media (max-width:480px) {
+    .hero-name { font-size:2.2rem; }
+    .hero-buttons { flex-direction:column; }
+    .btn { width:100%; justify-content:center; }
+    .hero-stats { flex-wrap:wrap; gap:20px; }
+    .section { padding:70px 0; }
+    .filter-btn { padding:8px 16px; font-size:0.8rem; }
 }
 </style>
 </head>
 <body>
 
-    <div id="particles"></div>
+<div id="particles"></div>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">
-                <span class="logo-bracket">{</span> JumpingLury <span class="logo-bracket">}</span>
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#contact" class="nav-link">Hire Me</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="#" class="nav-logo"><span class="logo-bracket">{</span> JumpingLury <span class="logo-bracket">}</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+            <li><a href="#sale" class="nav-link" style="color:var(--warning);">🔥 Sale</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#reviews-section" class="nav-link">Reviews</a></li>
+            <li><a href="#contact" class="nav-link">Hire Me</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="hero-text">
+            <p class="hero-greeting"><span class="typing-prefix">></span><span>Hello, I'm</span></p>
+            <h1 class="hero-name"><span class="name-main">Jumping</span><span class="name-accent">Lury</span></h1>
+            <h2 class="hero-title"><span class="title-static">Roblox </span><span class="title-dynamic" id="dynamicText"></span><span class="cursor">|</span></h2>
+            <p class="hero-description">Intermediate Lua Scripter with <strong>1 year of experience</strong> crafting gameplay systems, UI, and mechanics for Roblox games. Available for hire for your next project.</p>
+            <div class="hero-buttons">
+                <a href="#portfolio" class="btn btn-primary"><i class="fas fa-code"></i> View My Work</a>
+                <a href="https://discord.com/users/jumpinglury" target="_blank" class="btn btn-secondary"><i class="fab fa-discord"></i> Hire Me</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat"><span class="stat-number" data-target="1">0</span><span class="stat-suffix">+</span><span class="stat-label">Year Experience</span></div>
+                <div class="stat"><span class="stat-number" data-target="15">0</span><span class="stat-suffix">+</span><span class="stat-label">Projects Done</span></div>
+                <div class="stat"><span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span><span class="stat-label">Happy Clients</span></div>
             </div>
         </div>
-    </nav>
-
-    <!-- Hero -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-text">
-                <p class="hero-greeting">
-                    <span class="typing-prefix">></span>
-                    <span class="greeting-text">Hello, I'm</span>
-                </p>
-                <h1 class="hero-name">
-                    <span class="name-main">Jumping</span><span class="name-accent">Lury</span>
-                </h1>
-                <div class="hero-title-wrapper">
-                    <h2 class="hero-title">
-                        <span class="title-static">Roblox </span>
-                        <span class="title-dynamic" id="dynamicText"></span>
-                        <span class="cursor">|</span>
-                    </h2>
+        <div class="hero-visual">
+            <div class="code-window">
+                <div class="code-header">
+                    <div class="code-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                    <span class="code-filename">JumpingLury.lua</span>
                 </div>
-                <p class="hero-description">
-                    Intermediate Lua Scripter with <strong>1 year of experience</strong> crafting
-                    gameplay systems, UI, and mechanics for Roblox games. Available for hire
-                    for your next project.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#portfolio" class="btn btn-primary">
-                        <i class="fas fa-code"></i> View My Work
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-envelope"></i> Hire Me
-                    </a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number" data-target="1">0</span><span class="stat-suffix">+</span>
-                        <span class="stat-label">Year Experience</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" data-target="15">0</span><span class="stat-suffix">+</span>
-                        <span class="stat-label">Projects Done</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
-                        <span class="stat-label">Happy Clients</span>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="code-window">
-                    <div class="code-header">
-                        <div class="code-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <span class="code-filename">JumpingLury.lua</span>
-                    </div>
-                    <pre class="code-body"><code><span class="lua-keyword">local</span> <span class="lua-variable">Developer</span> = {
+                <pre class="code-body"><code><span class="lua-keyword">local</span> <span class="lua-variable">Developer</span> = {
     <span class="lua-key">Name</span> = <span class="lua-string">"JumpingLury"</span>,
     <span class="lua-key">Level</span> = <span class="lua-string">"Intermediate"</span>,
     <span class="lua-key">Experience</span> = <span class="lua-string">"1 Year"</span>,
-    <span class="lua-key">Language</span> = <span class="lua-string">"Luau / Lua"</span>,
+    <span class="lua-key">MinPrice</span> = <span class="lua-string">"R$ 3,000"</span>,
     <span class="lua-key">Available</span> = <span class="lua-boolean">true</span>,
 }
 
@@ -1287,394 +447,304 @@ img, video { max-width: 100%; display: block; }
         <span class="lua-keyword">return</span> <span class="lua-boolean">true</span>
     <span class="lua-keyword">end</span>
 <span class="lua-keyword">end</span></code></pre>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator"><div class="mouse"><div class="wheel"></div></div><p>Scroll Down</p></div>
+</section>
+
+<!-- About -->
+<section class="section about" id="about">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// ABOUT ME</span>
+            <h2 class="section-title">Who Is <span class="highlight">JumpingLury</span>?</h2>
+            <div class="title-underline"></div>
+        </div>
+        <div class="about-content">
+            <div class="about-image">
+                <div class="about-avatar"><div class="avatar-ring"></div><div class="avatar-icon"><i class="fas fa-gamepad"></i></div></div>
+                <div class="experience-badge"><span class="exp-number">1</span><span class="exp-text">Year<br>Exp.</span></div>
+            </div>
+            <div class="about-text">
+                <h3>Roblox Lua Scripter & Game Developer</h3>
+                <p>Hey there! I'm <strong>JumpingLury</strong>, an intermediate Roblox Lua scripter with <strong>1 year of hands-on experience</strong>. I specialize in creating clean, efficient scripts for Roblox games.</p>
+                <p>I take on projects ranging from simple systems to full game development. My minimum rate is <strong>R$ 3,000 / $50 USD</strong> — quality work at fair prices.</p>
+                <div class="about-details">
+                    <div class="detail-item"><i class="fas fa-user"></i><span><strong>Name:</strong> JumpingLury</span></div>
+                    <div class="detail-item"><i class="fas fa-layer-group"></i><span><strong>Level:</strong> Intermediate</span></div>
+                    <div class="detail-item"><i class="fas fa-calendar-alt"></i><span><strong>Experience:</strong> 1 Year</span></div>
+                    <div class="detail-item"><i class="fas fa-check-circle"></i><span><strong>Status:</strong> Available for Hire</span></div>
+                </div>
+                <a href="https://discord.com/users/jumpinglury" target="_blank" class="btn btn-primary"><i class="fab fa-discord"></i> Contact on Discord</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills -->
+<section class="section skills" id="skills">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// MY SKILLS</span>
+            <h2 class="section-title">What I <span class="highlight">Know</span></h2>
+            <div class="title-underline"></div>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card"><div class="skill-icon"><i class="fas fa-code"></i></div><h3>Luau / Lua Scripting</h3><p>Clean, efficient Lua code for Roblox including server and client scripts.</p><div class="skill-bar"><div class="skill-fill" data-width="70%"><span>70%</span></div></div></div>
+            <div class="skill-card"><div class="skill-icon"><i class="fas fa-desktop"></i></div><h3>UI / GUI Design</h3><p>Interactive and visually appealing user interfaces with scripted functionality.</p><div class="skill-bar"><div class="skill-fill" data-width="65%"><span>65%</span></div></div></div>
+            <div class="skill-card"><div class="skill-icon"><i class="fas fa-database"></i></div><h3>DataStore Systems</h3><p>Save/load systems using Roblox DataStores to persist player data.</p><div class="skill-bar"><div class="skill-fill" data-width="60%"><span>60%</span></div></div></div>
+            <div class="skill-card"><div class="skill-icon"><i class="fas fa-crosshairs"></i></div><h3>Game Mechanics</h3><p>Combat systems, tools, abilities, and core gameplay loops.</p><div class="skill-bar"><div class="skill-fill" data-width="72%"><span>72%</span></div></div></div>
+            <div class="skill-card"><div class="skill-icon"><i class="fas fa-robot"></i></div><h3>NPC / AI Behavior</h3><p>NPC pathfinding, interactions, enemies, and AI behavior trees.</p><div class="skill-bar"><div class="skill-fill" data-width="55%"><span>55%</span></div></div></div>
+            <div class="skill-card"><div class="skill-icon"><i class="fas fa-server"></i></div><h3>Client-Server Architecture</h3><p>RemoteEvents, RemoteFunctions, and network security practices.</p><div class="skill-bar"><div class="skill-fill" data-width="62%"><span>62%</span></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio -->
+<section class="section portfolio" id="portfolio">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// MY WORK</span>
+            <h2 class="section-title">Project <span class="highlight">Portfolio</span></h2>
+            <div class="title-underline"></div>
+            <p class="section-subtitle">Check out clips and showcases of my previous work</p>
+        </div>
+        <div class="portfolio-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="mechanics">Mechanics</button>
+            <button class="filter-btn" data-filter="systems">Systems</button>
+            <button class="filter-btn" data-filter="obby">Obby</button>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid">
+            <!-- Video 1 -->
+            <div class="portfolio-item" data-category="mechanics">
+                <div class="portfolio-card">
+                    <div class="portfolio-media"><div class="video-wrapper"><iframe src="https://streamable.com/e/wvg1iu" frameborder="0" allowfullscreen allow="autoplay"></iframe></div><span class="portfolio-badge">Video Clip</span></div>
+                    <div class="portfolio-info"><h3>Project Showcase #1</h3><p>Custom scripted mechanics and gameplay systems built in Roblox Studio.</p><div class="portfolio-tags"><span>Lua</span><span>Mechanics</span><span>Roblox</span></div></div>
+                </div>
+            </div>
+            <!-- Video 2 -->
+            <div class="portfolio-item" data-category="systems">
+                <div class="portfolio-card">
+                    <div class="portfolio-media"><div class="video-wrapper"><iframe src="https://streamable.com/e/kpvx5j" frameborder="0" allowfullscreen allow="autoplay"></iframe></div><span class="portfolio-badge">Video Clip</span></div>
+                    <div class="portfolio-info"><h3>Project Showcase #2</h3><p>Scripted system showcase with clean code and smooth functionality.</p><div class="portfolio-tags"><span>Lua</span><span>Systems</span><span>Roblox</span></div></div>
+                </div>
+            </div>
+            <!-- Video 3 - Obby -->
+            <div class="portfolio-item" data-category="obby">
+                <div class="portfolio-card">
+                    <div class="portfolio-media"><div class="video-wrapper"><iframe src="https://streamable.com/e/qrxge6" frameborder="0" allowfullscreen allow="autoplay"></iframe></div><span class="portfolio-badge">Video Clip</span></div>
+                    <div class="portfolio-info"><h3>Obby + Admin Panel System</h3><p>Full obby game with built-in admin panel system for game management.</p><div class="portfolio-tags"><span>Obby</span><span>Admin Panel</span><span>Full Game</span></div></div>
+                </div>
+            </div>
+            <!-- Video 4 - Obby -->
+            <div class="portfolio-item" data-category="obby">
+                <div class="portfolio-card">
+                    <div class="portfolio-media"><div class="video-wrapper"><iframe src="https://streamable.com/e/20iy1k" frameborder="0" allowfullscreen allow="autoplay"></iframe></div><span class="portfolio-badge">Video Clip</span></div>
+                    <div class="portfolio-info"><h3>Obby Game Showcase</h3><p>Complete obby experience with checkpoints, UI, and polished gameplay.</p><div class="portfolio-tags"><span>Obby</span><span>Checkpoints</span><span>UI</span></div></div>
+                </div>
+            </div>
+            <!-- Video 5 - Lobby System -->
+            <div class="portfolio-item" data-category="systems">
+                <div class="portfolio-card">
+                    <div class="portfolio-media"><div class="video-wrapper"><iframe src="https://streamable.com/e/d264q4" frameborder="0" allowfullscreen allow="autoplay"></iframe></div><span class="portfolio-badge">Video Clip</span></div>
+                    <div class="portfolio-info"><h3>Lobby System</h3><p>Custom lobby system with player management, teleportation, and UI integration.</p><div class="portfolio-tags"><span>Lobby</span><span>Teleport</span><span>Systems</span></div></div>
+                </div>
+            </div>
+            <!-- Coming Soon -->
+            <div class="portfolio-item" data-category="mechanics">
+                <div class="portfolio-card coming-soon-card">
+                    <div class="portfolio-media coming-soon-media"><div class="coming-soon-content"><i class="fas fa-plus-circle"></i><h4>More Coming Soon</h4><p>New projects added regularly</p></div></div>
+                    <div class="portfolio-info"><h3>Future Project</h3><p>More work samples coming as I complete new commissions.</p><div class="portfolio-tags"><span>Coming Soon</span></div></div>
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="mouse"><div class="wheel"></div></div>
-            <p>Scroll Down</p>
-        </div>
-    </section>
 
-    <!-- About -->
-    <section class="section about" id="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">// ABOUT ME</span>
-                <h2 class="section-title">Who Is <span class="highlight">JumpingLury</span>?</h2>
-                <div class="title-underline"></div>
-            </div>
-            <div class="about-content">
-                <div class="about-image">
-                    <div class="about-avatar">
-                        <div class="avatar-ring"></div>
-                        <div class="avatar-icon"><i class="fas fa-gamepad"></i></div>
-                    </div>
-                    <div class="experience-badge">
-                        <span class="exp-number">1</span>
-                        <span class="exp-text">Year<br>Exp.</span>
-                    </div>
-                </div>
-                <div class="about-text">
-                    <h3>Roblox Lua Scripter & Game Developer</h3>
-                    <p>Hey there! I'm <strong>JumpingLury</strong>, an intermediate Roblox Lua scripter with <strong>1 year of hands-on experience</strong>. I specialize in creating clean, efficient scripts for Roblox games — from gameplay mechanics and UI systems to data stores and interactive elements.</p>
-                    <p>I love taking on <strong>less complex but meaningful projects</strong> and delivering quality work at affordable rates. Whether you need a combat system, a shop GUI, NPC behavior, or game logic — I've got you covered.</p>
-                    <div class="about-details">
-                        <div class="detail-item"><i class="fas fa-user"></i><span><strong>Name:</strong> JumpingLury</span></div>
-                        <div class="detail-item"><i class="fas fa-layer-group"></i><span><strong>Level:</strong> Intermediate</span></div>
-                        <div class="detail-item"><i class="fas fa-calendar-alt"></i><span><strong>Experience:</strong> 1 Year</span></div>
-                        <div class="detail-item"><i class="fas fa-check-circle"></i><span><strong>Status:</strong> Available for Hire</span></div>
-                    </div>
-                    <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get In Touch</a>
-                </div>
+        <div class="video-showcase-section">
+            <h3 class="showcase-title"><i class="fas fa-film"></i> Full Video Showcases</h3>
+            <p class="showcase-subtitle">Watch my work in action</p>
+            <div class="showcase-grid">
+                <div class="showcase-card"><div class="showcase-video"><div class="video-wrapper"><iframe src="https://streamable.com/e/qrxge6" frameborder="0" allowfullscreen allow="autoplay"></iframe></div></div><div class="showcase-info"><h4>Obby + Admin Panel — Full Demo</h4><p>Complete obby with admin panel system walkthrough</p></div></div>
+                <div class="showcase-card"><div class="showcase-video"><div class="video-wrapper"><iframe src="https://streamable.com/e/20iy1k" frameborder="0" allowfullscreen allow="autoplay"></iframe></div></div><div class="showcase-info"><h4>Obby Showcase — Full Demo</h4><p>Full obby game with polished gameplay</p></div></div>
+                <div class="showcase-card"><div class="showcase-video"><div class="video-wrapper"><iframe src="https://streamable.com/e/d264q4" frameborder="0" allowfullscreen allow="autoplay"></iframe></div></div><div class="showcase-info"><h4>Lobby System — Full Demo</h4><p>Complete lobby system demonstration</p></div></div>
+                <div class="showcase-card"><div class="showcase-video"><div class="video-wrapper"><iframe src="https://streamable.com/e/wvg1iu" frameborder="0" allowfullscreen allow="autoplay"></iframe></div></div><div class="showcase-info"><h4>Mechanics — Full Demo</h4><p>Scripted mechanics and gameplay systems</p></div></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Skills -->
-    <section class="section skills" id="skills">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">// MY SKILLS</span>
-                <h2 class="section-title">What I <span class="highlight">Know</span></h2>
-                <div class="title-underline"></div>
+<!-- SALE BANNER -->
+<section class="sale-banner" id="sale">
+    <div class="sale-inner">
+        <div class="sale-tag">🔥 LIMITED TIME SALE 🔥</div>
+        <h2>Complete Obby Game Package <span>ON SALE</span></h2>
+        <div class="sale-price-display">
+            <span class="sale-old-price">R$ 30,000+</span>
+            <span class="sale-arrow">→</span>
+            <span class="sale-new-price">R$ 10,000</span>
+        </div>
+        <p class="sale-desc">Get a full obby game with admin panel, lobby system, checkpoints, UI, and more — all for one price!</p>
+        <div class="sale-includes">
+            <span class="sale-item">✅ Full Obby Game</span>
+            <span class="sale-item">✅ Admin Panel</span>
+            <span class="sale-item">✅ Lobby System</span>
+            <span class="sale-item">✅ Checkpoint System</span>
+            <span class="sale-item">✅ Complete UI</span>
+            <span class="sale-item">✅ DataStore Saving</span>
+        </div>
+        <a href="https://discord.com/users/jumpinglury" target="_blank" class="sale-btn"><i class="fab fa-discord"></i> Claim This Deal on Discord</a>
+    </div>
+</section>
+
+<!-- Services -->
+<section class="section services" id="services">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// SERVICES & PRICING</span>
+            <h2 class="section-title">What I <span class="highlight">Offer</span></h2>
+            <div class="title-underline"></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-cogs"></i></div>
+                <h3>Small Systems & Scripts</h3>
+                <p>Individual mechanics, tools, small UI elements, bug fixes, and simple systems.</p>
+                <div class="service-price">Starting at <strong>$50+</strong><span class="price-robux">R$ 3,000+ Robux</span></div>
             </div>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-code"></i></div>
-                    <h3>Luau / Lua Scripting</h3>
-                    <p>Writing clean, efficient Lua code for Roblox games including server and client scripts.</p>
-                    <div class="skill-bar"><div class="skill-fill" data-width="70%"><span>70%</span></div></div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-desktop"></i></div>
-                    <h3>UI / GUI Design</h3>
-                    <p>Creating interactive and visually appealing user interfaces with scripted functionality.</p>
-                    <div class="skill-bar"><div class="skill-fill" data-width="65%"><span>65%</span></div></div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-database"></i></div>
-                    <h3>DataStore Systems</h3>
-                    <p>Implementing save/load systems using Roblox DataStores to persist player data.</p>
-                    <div class="skill-bar"><div class="skill-fill" data-width="60%"><span>60%</span></div></div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-crosshairs"></i></div>
-                    <h3>Game Mechanics</h3>
-                    <p>Building combat systems, tools, abilities, and core gameplay loops.</p>
-                    <div class="skill-bar"><div class="skill-fill" data-width="72%"><span>72%</span></div></div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-robot"></i></div>
-                    <h3>NPC / AI Behavior</h3>
-                    <p>Scripting NPC pathfinding, interactions, enemies, and simple AI behavior trees.</p>
-                    <div class="skill-bar"><div class="skill-fill" data-width="55%"><span>55%</span></div></div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-server"></i></div>
-                    <h3>Client-Server Architecture</h3>
-                    <p>Understanding RemoteEvents, RemoteFunctions, and proper network security practices.</p>
-                    <div class="skill-bar"><div class="skill-fill" data-width="62%"><span>62%</span></div></div>
-                </div>
+            <div class="service-card featured">
+                <div class="service-badge">Most Popular</div>
+                <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>Medium Projects</h3>
+                <p>Full UI systems, shops, inventories, data systems, combat, and multi-script projects.</p>
+                <div class="service-price">Starting at <strong>$85+</strong><span class="price-robux">R$ 7,000+ Robux</span></div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-gamepad"></i></div>
+                <h3>Full Game Development</h3>
+                <p>Complete game scripting — lobby, gameplay, UI, data, admin panel, and everything needed.</p>
+                <div class="service-price">Starting at <strong>$350+</strong><span class="price-robux">R$ 30,000+ Robux</span></div>
             </div>
         </div>
-    </section>
-
-    <!-- Portfolio -->
-    <section class="section portfolio" id="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">// MY WORK</span>
-                <h2 class="section-title">Project <span class="highlight">Portfolio</span></h2>
-                <div class="title-underline"></div>
-                <p class="section-subtitle">Check out clips and showcases of my previous work</p>
-            </div>
-
-            <div class="portfolio-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="mechanics">Mechanics</button>
-                <button class="filter-btn" data-filter="ui">UI / GUI</button>
-                <button class="filter-btn" data-filter="systems">Systems</button>
-            </div>
-
-            <div class="portfolio-grid" id="portfolioGrid">
-
-                <div class="portfolio-item" data-category="mechanics">
-                    <div class="portfolio-card">
-                        <div class="portfolio-media">
-                            <div class="video-wrapper">
-                                <iframe src="https://streamable.com/e/wvg1iu" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-                            </div>
-                            <span class="portfolio-badge">Video Clip</span>
-                        </div>
-                        <div class="portfolio-info">
-                            <h3>Project Showcase #1</h3>
-                            <p>Demonstrating custom scripted mechanics and gameplay systems built in Roblox Studio.</p>
-                            <div class="portfolio-tags">
-                                <span>Lua</span><span>Mechanics</span><span>Roblox</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="systems">
-                    <div class="portfolio-card">
-                        <div class="portfolio-media">
-                            <div class="video-wrapper">
-                                <iframe src="https://streamable.com/e/kpvx5j" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-                            </div>
-                            <span class="portfolio-badge">Video Clip</span>
-                        </div>
-                        <div class="portfolio-info">
-                            <h3>Project Showcase #2</h3>
-                            <p>A scripted system showcase featuring clean code implementation and smooth functionality.</p>
-                            <div class="portfolio-tags">
-                                <span>Lua</span><span>Systems</span><span>Roblox</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-category="ui">
-                    <div class="portfolio-card coming-soon-card">
-                        <div class="portfolio-media coming-soon-media">
-                            <div class="coming-soon-content">
-                                <i class="fas fa-plus-circle"></i>
-                                <h4>More Coming Soon</h4>
-                                <p>New projects being added regularly</p>
-                            </div>
-                        </div>
-                        <div class="portfolio-info">
-                            <h3>Future Project</h3>
-                            <p>More work samples will be added here as I complete new commissions and projects.</p>
-                            <div class="portfolio-tags"><span>Coming Soon</span></div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="video-showcase-section">
-                <h3 class="showcase-title"><i class="fas fa-film"></i> Full Video Showcases</h3>
-                <p class="showcase-subtitle">Watch my work in action — click play to view</p>
-                <div class="showcase-grid">
-                    <div class="showcase-card">
-                        <div class="showcase-video">
-                            <div class="video-wrapper">
-                                <iframe src="https://streamable.com/e/wvg1iu" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-                            </div>
-                        </div>
-                        <div class="showcase-info">
-                            <h4>Showcase #1 — Full Demo</h4>
-                            <p>Full walkthrough of scripted mechanics in action</p>
-                        </div>
-                    </div>
-                    <div class="showcase-card">
-                        <div class="showcase-video">
-                            <div class="video-wrapper">
-                                <iframe src="https://streamable.com/e/kpvx5j" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-                            </div>
-                        </div>
-                        <div class="showcase-info">
-                            <h4>Showcase #2 — Full Demo</h4>
-                            <p>Complete demonstration of systems and scripting</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="services-note">
+            <i class="fas fa-info-circle"></i>
+            <p>I accept both <strong>USD ($50 minimum)</strong> and <strong>Robux (R$ 3,000 minimum)</strong>. Prices depend on project complexity. <strong>DM me on Discord</strong> for a custom quote!</p>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Services -->
-    <section class="section services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">// SERVICES</span>
-                <h2 class="section-title">What I <span class="highlight">Offer</span></h2>
-                <div class="title-underline"></div>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Game Mechanics</h3>
-                    <p>Combat systems, tools, abilities, movement mechanics, and gameplay loops.</p>
-                    <div class="service-price">Starting at <strong>$5–15</strong></div>
-                </div>
-                <div class="service-card featured">
-                    <div class="service-badge">Popular</div>
-                    <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
-                    <h3>UI / GUI Scripting</h3>
-                    <p>Interactive menus, shops, inventories, HUDs, and animated interfaces.</p>
-                    <div class="service-price">Starting at <strong>$5–20</strong></div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-save"></i></div>
-                    <h3>Data Systems</h3>
-                    <p>Save systems, leaderboards, player stats, and DataStore integration.</p>
-                    <div class="service-price">Starting at <strong>$5–15</strong></div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-bug"></i></div>
-                    <h3>Bug Fixes & Tweaks</h3>
-                    <p>Debugging existing scripts, optimizing code, and fixing broken systems.</p>
-                    <div class="service-price">Starting at <strong>$3–10</strong></div>
-                </div>
-            </div>
-            <div class="services-note">
-                <i class="fas fa-info-circle"></i>
-                <p>I specialize in <strong>less complex projects</strong> — perfect for indie devs, small teams, or anyone needing quality work at affordable prices. Prices are flexible and depend on complexity!</p>
-            </div>
+<!-- Reviews -->
+<section class="section reviews" id="reviews-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// REVIEWS</span>
+            <h2 class="section-title">Client <span class="highlight">Reviews</span></h2>
+            <div class="title-underline"></div>
+            <p class="section-subtitle">See what people say about my work</p>
         </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="section testimonials">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">// FEEDBACK</span>
-                <h2 class="section-title">Client <span class="highlight">Reviews</span></h2>
-                <div class="title-underline"></div>
-            </div>
-            <div class="testimonials-slider" id="testimonialsSlider">
-                <div class="testimonial-card active">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p>"JumpingLury delivered exactly what I needed for my obby game. Clean code, fast delivery. Will hire again!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">C1</div>
-                        <div><strong>Client #1</strong><span>Roblox Game Dev</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                    <p>"Great communication and the shop system works perfectly. Very affordable and professional for the price."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">C2</div>
-                        <div><strong>Client #2</strong><span>Studio Owner</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p>"Helped me fix so many bugs in my game. Patient, skilled, and easy to work with. Highly recommend!"</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">C3</div>
-                        <div><strong>Client #3</strong><span>Indie Developer</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-dots" id="sliderDots">
-                <button class="dot active" data-index="0"></button>
-                <button class="dot" data-index="1"></button>
-                <button class="dot" data-index="2"></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">// HIRE ME</span>
-                <h2 class="section-title">Let's <span class="highlight">Work Together</span></h2>
-                <div class="title-underline"></div>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Get In Touch</h3>
-                    <p>Ready to bring your Roblox game to life? Send me a message and let's discuss your project!</p>
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <div class="method-icon"><i class="fab fa-discord"></i></div>
-                            <div><strong>Discord</strong><p>JumpingLury</p></div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="method-icon"><i class="fas fa-gamepad"></i></div>
-                            <div><strong>Roblox</strong><p>JumpingLury</p></div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="method-icon"><i class="fas fa-envelope"></i></div>
-                            <div><strong>Email</strong><p>jumpinglury@email.com</p></div>
-                        </div>
-                        <div class="contact-method">
-                            <div class="method-icon"><i class="fab fa-twitter"></i></div>
-                            <div><strong>Twitter / X</strong><p>@JumpingLury</p></div>
-                        </div>
-                    </div>
-                </div>
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" placeholder="What's your name?" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="discord">Your Discord</label>
-                        <input type="text" id="discord" name="discord" placeholder="Username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="projectType">Project Type</label>
-                        <select id="projectType" name="projectType" required>
-                            <option value="" disabled selected>Select a project type</option>
-                            <option value="mechanics">Game Mechanics</option>
-                            <option value="ui">UI / GUI</option>
-                            <option value="data">Data Systems</option>
-                            <option value="bugfix">Bug Fixes</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="budget">Budget Range</label>
-                        <select id="budget" name="budget" required>
-                            <option value="" disabled selected>Select your budget</option>
-                            <option value="5-10">$5 – $10</option>
-                            <option value="10-25">$10 – $25</option>
-                            <option value="25-50">$25 – $50</option>
-                            <option value="50+">$50+</option>
-                            <option value="negotiate">Let's Negotiate</option>
-                        </select>
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="message">Project Details</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">
-                        <i class="fas fa-paper-plane"></i> Send Message
-                    </button>
+        <div class="reviews-list" id="reviewsList"></div>
+        <div class="review-form-container">
+            <h3>Leave a Review</h3>
+            <div class="review-form" id="reviewFormWrapper">
+                <form id="reviewForm">
+                    <div class="form-group"><label for="reviewName">Your Name / Username</label><input type="text" id="reviewName" placeholder="Enter your name" required></div>
+                    <div class="form-group"><label>Rating</label><div class="star-rating" id="starRating"><i class="fas fa-star" data-rating="1"></i><i class="fas fa-star" data-rating="2"></i><i class="fas fa-star" data-rating="3"></i><i class="fas fa-star" data-rating="4"></i><i class="fas fa-star" data-rating="5"></i></div></div>
+                    <div class="form-group"><label for="reviewText">Your Review</label><textarea id="reviewText" rows="4" placeholder="Tell others about your experience..." required></textarea></div>
+                    <button type="submit" class="btn btn-primary btn-full"><i class="fas fa-paper-plane"></i> Submit Review</button>
                 </form>
+                <div class="review-pending-note"><i class="fas fa-shield-alt"></i> All reviews are manually approved by JumpingLury before being published.</div>
             </div>
+            <div class="review-success" id="reviewSuccess"><i class="fas fa-check-circle"></i><h4>Review Submitted!</h4><p>Thank you! Your review will appear once JumpingLury approves it.</p></div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3><span class="logo-bracket">{</span> JumpingLury <span class="logo-bracket">}</span></h3>
-                    <p>Intermediate Roblox Lua Scripter</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#portfolio">Portfolio</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-social">
-                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 JumpingLury. All rights reserved. Built with <i class="fas fa-heart" style="color:#e74c3c;"></i></p>
-            </div>
+<!-- Contact -->
+<section class="section contact" id="contact">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// HIRE ME</span>
+            <h2 class="section-title">Let's <span class="highlight">Work Together</span></h2>
+            <div class="title-underline"></div>
         </div>
-    </footer>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                <p>Ready to bring your Roblox game to life? Contact me on Discord and let's discuss your project!</p>
+                <div class="contact-methods">
+                    <div class="contact-method"><div class="method-icon"><i class="fab fa-discord"></i></div><div><strong>Discord</strong><p>jumpinglury</p></div></div>
+                </div>
+                <a href="https://discord.com/users/jumpinglury" target="_blank" class="discord-big-btn"><i class="fab fa-discord"></i> Message Me on Discord</a>
+                <a href="https://discord.com/users/jumpinglury" target="_blank" class="discord-big-btn" style="margin-top:10px;background:var(--accent-gradient);"><i class="fas fa-handshake"></i> Hire Me Now</a>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" placeholder="What's your name?" required></div>
+                <div class="form-group"><label for="discord">Your Discord</label><input type="text" id="discord" name="discord" placeholder="Username" required></div>
+                <div class="form-group"><label for="projectType">Project Type</label>
+                    <select id="projectType" name="projectType" required>
+                        <option value="" disabled selected>Select a project type</option>
+                        <option value="Small System / Script">Small System / Script (R$3k+ / $50+)</option>
+                        <option value="Medium Project">Medium Project (R$7k+ / $85+)</option>
+                        <option value="Full Game">Full Game (R$30k+ / $350+)</option>
+                        <option value="Sale Package - R$10k">🔥 Sale Package — R$10,000</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group"><label for="budget">Budget</label>
+                    <select id="budget" name="budget" required>
+                        <option value="" disabled selected>Select your budget</option>
+                        <option value="R$3,000-5,000 / $50-60">R$3,000–5,000 / $50–60</option>
+                        <option value="R$5,000-7,000 / $60-85">R$5,000–7,000 / $60–85</option>
+                        <option value="R$7,000-15,000 / $85-180">R$7,000–15,000 / $85–180</option>
+                        <option value="R$15,000-30,000 / $180-350">R$15,000–30,000 / $180–350</option>
+                        <option value="R$30,000+ / $350+">R$30,000+ / $350+</option>
+                        <option value="R$10,000 Sale Package">🔥 R$10,000 Sale Package</option>
+                        <option value="Negotiate">Let's Negotiate</option>
+                    </select>
+                </div>
+                <div class="form-group full-width"><label for="message">Project Details</label><textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea></div>
+                <button type="submit" class="btn btn-primary btn-full"><i class="fas fa-paper-plane"></i> Send to My Discord</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand"><h3><span class="logo-bracket">{</span> <span class="admin-trigger" id="adminTrigger">JumpingLury</span> <span class="logo-bracket">}</span></h3><p>Intermediate Roblox Lua Scripter</p></div>
+            <div class="footer-links"><a href="#home">Home</a><a href="#about">About</a><a href="#portfolio">Portfolio</a><a href="#contact">Contact</a></div>
+            <div class="footer-social"><a href="https://discord.com/users/jumpinglury" target="_blank" class="social-link"><i class="fab fa-discord"></i></a></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2024 JumpingLury. All rights reserved. Built with <i class="fas fa-heart" style="color:#e74c3c;"></i></p></div>
+    </div>
+</footer>
+
+<!-- Admin Panel -->
+<div class="admin-panel" id="adminPanel">
+    <div class="admin-container">
+        <div class="admin-login" id="adminLogin">
+            <h3><i class="fas fa-lock"></i> Admin Panel</h3>
+            <p style="color:var(--text-secondary);margin-bottom:20px;font-size:0.9rem;">Enter password to manage reviews</p>
+            <input type="password" id="adminPassword" placeholder="Enter password">
+            <button class="btn btn-primary btn-full" onclick="loginAdmin()">Login</button>
+            <p class="admin-error" id="adminError">Wrong password!</p>
+            <button class="btn btn-secondary btn-full" style="margin-top:10px;" onclick="closeAdmin()">Cancel</button>
+        </div>
+        <div id="adminDashboard" style="display:none;">
+            <div class="admin-header"><h2><i class="fas fa-shield-alt"></i> Review Manager</h2><button class="admin-close" onclick="closeAdmin()">&times;</button></div>
+            <h3 style="margin-bottom:20px;color:var(--warning);"><i class="fas fa-clock"></i> Pending Reviews</h3>
+            <div id="pendingReviews"></div>
+            <h3 style="margin:30px 0 20px;color:var(--success);"><i class="fas fa-check"></i> Approved Reviews</h3>
+            <div id="approvedReviews"></div>
+        </div>
+    </div>
+</div>
 
 <script>
-// ============================================
-// JUMPINGLURY PORTFOLIO - ALL JAVASCRIPT
-// ============================================
+const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1306423174705844235/nVGf1H9Xc1klbCfuwOUycnp3kt3_kNf78lPXsZCDMEvwIplxeYEaaqyJY60EM5Txq7nX";
+const ADMIN_PASSWORD = "jumpinglury2024";
 
 document.addEventListener('DOMContentLoaded', () => {
     createParticles();
@@ -1685,204 +755,250 @@ document.addEventListener('DOMContentLoaded', () => {
     initStatsCounter();
     initSkillBars();
     initPortfolioFilter();
-    initTestimonialsSlider();
     initContactForm();
+    initReviewSystem();
     initActiveNavLink();
+    initAdminPanel();
 });
 
 function createParticles() {
-    const container = document.getElementById('particles');
-    for (let i = 0; i < 50; i++) {
+    const c = document.getElementById('particles');
+    for (let i=0;i<50;i++) {
         const p = document.createElement('div');
         p.classList.add('particle');
-        const size = Math.random() * 4 + 2;
-        p.style.cssText = `
-            width:${size}px; height:${size}px;
-            left:${Math.random()*100}%;
-            animation-duration:${Math.random()*20+10}s;
-            animation-delay:${Math.random()*20}s;
-            background:${Math.random()>0.5?'#00d4ff':'#7c3aed'};
-        `;
-        container.appendChild(p);
+        const s = Math.random()*4+2;
+        p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*20+10}s;animation-delay:${Math.random()*20}s;background:${Math.random()>0.5?'#00d4ff':'#7c3aed'};`;
+        c.appendChild(p);
     }
 }
 
 function initTypingAnimation() {
     const words = ['Lua Scripter','Game Developer','UI Designer','Systems Builder','Problem Solver'];
     const el = document.getElementById('dynamicText');
-    let wordIndex=0, charIndex=0, isDeleting=false;
-
+    let wi=0,ci=0,del=false;
     function type() {
-        const word = words[wordIndex];
-        el.textContent = isDeleting
-            ? word.substring(0, charIndex-1)
-            : word.substring(0, charIndex+1);
-        isDeleting ? charIndex-- : charIndex++;
-
-        let speed = isDeleting ? 50 : 100;
-
-        if (!isDeleting && charIndex === word.length) {
-            speed = 2000; isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex+1) % words.length;
-            speed = 500;
-        }
-        setTimeout(type, speed);
+        const w=words[wi];
+        el.textContent=del?w.substring(0,ci-1):w.substring(0,ci+1);
+        del?ci--:ci++;
+        let sp=del?50:100;
+        if(!del&&ci===w.length){sp=2000;del=true;}
+        else if(del&&ci===0){del=false;wi=(wi+1)%words.length;sp=500;}
+        setTimeout(type,sp);
     }
     type();
 }
 
 function initNavbar() {
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 50);
-    });
+    const n=document.getElementById('navbar');
+    window.addEventListener('scroll',()=>n.classList.toggle('scrolled',window.scrollY>50));
 }
 
 function initMobileMenu() {
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-        });
-    });
+    const h=document.getElementById('hamburger'),n=document.getElementById('navLinks');
+    h.addEventListener('click',()=>{h.classList.toggle('active');n.classList.toggle('active');});
+    document.querySelectorAll('.nav-link').forEach(l=>l.addEventListener('click',()=>{h.classList.remove('active');n.classList.remove('active');}));
 }
 
 function initScrollAnimations() {
-    const els = document.querySelectorAll(
-        '.skill-card,.portfolio-item,.service-card,.about-content,.contact-content,.showcase-card,.services-note'
-    );
-    els.forEach(el => el.classList.add('fade-in'));
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    els.forEach(el => observer.observe(el));
+    const els=document.querySelectorAll('.skill-card,.portfolio-item,.service-card,.about-content,.contact-content,.showcase-card,.services-note,.review-card,.review-form-container');
+    els.forEach(e=>e.classList.add('fade-in'));
+    const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+    els.forEach(e=>obs.observe(e));
 }
 
 function initStatsCounter() {
-    const stats = document.querySelectorAll('.stat-number');
-    let counted = false;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !counted) {
-                counted = true;
-                stats.forEach(stat => {
-                    const target = parseInt(stat.getAttribute('data-target'));
-                    let current = 0;
-                    const step = target / (2000/16);
-                    const counter = setInterval(() => {
-                        current += step;
-                        if (current >= target) {
-                            stat.textContent = target;
-                            clearInterval(counter);
-                        } else {
-                            stat.textContent = Math.floor(current);
-                        }
-                    }, 16);
+    const stats=document.querySelectorAll('.stat-number');
+    let counted=false;
+    const obs=new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+            if(e.isIntersecting&&!counted){
+                counted=true;
+                stats.forEach(s=>{
+                    const t=parseInt(s.getAttribute('data-target'));
+                    let c=0;const step=t/(2000/16);
+                    const int=setInterval(()=>{c+=step;if(c>=t){s.textContent=t;clearInterval(int);}else{s.textContent=Math.floor(c);}},16);
                 });
             }
         });
-    }, { threshold: 0.5 });
-
-    const heroStats = document.querySelector('.hero-stats');
-    if (heroStats) observer.observe(heroStats);
+    },{threshold:0.5});
+    const hs=document.querySelector('.hero-stats');
+    if(hs)obs.observe(hs);
 }
 
 function initSkillBars() {
-    const fills = document.querySelectorAll('.skill-fill');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.width = entry.target.getAttribute('data-width');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-    fills.forEach(fill => observer.observe(fill));
+    const f=document.querySelectorAll('.skill-fill');
+    const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.style.width=e.target.getAttribute('data-width');obs.unobserve(e.target);}}),{threshold:0.5});
+    f.forEach(fill=>obs.observe(fill));
 }
 
 function initPortfolioFilter() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const items = document.querySelectorAll('.portfolio-item');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.getAttribute('data-filter');
-            items.forEach(item => {
-                const match = filter==='all' || item.getAttribute('data-category')===filter;
-                item.classList.toggle('hidden', !match);
-            });
-        });
-    });
-}
-
-function initTestimonialsSlider() {
-    const cards = document.querySelectorAll('.testimonial-card');
-    const dots = document.querySelectorAll('.slider-dots .dot');
-    let current = 0;
-
-    function showSlide(index) {
-        cards.forEach(c => c.classList.remove('active'));
-        dots.forEach(d => d.classList.remove('active'));
-        cards[index].classList.add('active');
-        dots[index].classList.add('active');
-        current = index;
-    }
-
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            showSlide(parseInt(dot.getAttribute('data-index')));
-        });
-    });
-
-    setInterval(() => showSlide((current+1) % cards.length), 5000);
+    const btns=document.querySelectorAll('.filter-btn'),items=document.querySelectorAll('.portfolio-item');
+    btns.forEach(b=>b.addEventListener('click',()=>{
+        btns.forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+        const f=b.getAttribute('data-filter');
+        items.forEach(i=>i.classList.toggle('hidden',f!=='all'&&i.getAttribute('data-category')!==f));
+    }));
 }
 
 function initContactForm() {
-    const form = document.getElementById('contactForm');
-    form.addEventListener('submit', (e) => {
+    document.getElementById('contactForm').addEventListener('submit',async(e)=>{
         e.preventDefault();
-        const btn = form.querySelector('button[type="submit"]');
-        const original = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-        btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-        setTimeout(() => {
-            btn.innerHTML = original;
-            btn.style.background = '';
-            form.reset();
-        }, 3000);
+        const form=e.target;
+        const btn=form.querySelector('button[type="submit"]');
+        const original=btn.innerHTML;
+        const data={embeds:[{title:"📩 New Hire Request!",color:55551,fields:[
+            {name:"👤 Name",value:form.name.value,inline:true},
+            {name:"💬 Discord",value:form.discord.value,inline:true},
+            {name:"📋 Project Type",value:form.projectType.value,inline:true},
+            {name:"💰 Budget",value:form.budget.value,inline:true},
+            {name:"📝 Details",value:form.message.value}
+        ],footer:{text:"JumpingLury Portfolio"},timestamp:new Date().toISOString()}]};
+        try {
+            await fetch(DISCORD_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+            btn.innerHTML='<i class="fas fa-check"></i> Sent to Discord!';
+            btn.style.background='linear-gradient(135deg,#10b981,#059669)';
+            setTimeout(()=>{btn.innerHTML=original;btn.style.background='';form.reset();},3000);
+        } catch(err) {
+            btn.innerHTML='<i class="fas fa-times"></i> Error — Try Discord DM';
+            btn.style.background='linear-gradient(135deg,#ef4444,#dc2626)';
+            setTimeout(()=>{btn.innerHTML=original;btn.style.background='';},3000);
+        }
     });
 }
 
+function initReviewSystem() {
+    let selectedRating=0;
+    const stars=document.querySelectorAll('#starRating i');
+    stars.forEach(star=>{
+        star.addEventListener('click',()=>{
+            selectedRating=parseInt(star.getAttribute('data-rating'));
+            stars.forEach((s,i)=>s.classList.toggle('active',i<selectedRating));
+        });
+        star.addEventListener('mouseenter',()=>{
+            const r=parseInt(star.getAttribute('data-rating'));
+            stars.forEach((s,i)=>s.classList.toggle('active',i<r));
+        });
+    });
+    document.getElementById('starRating').addEventListener('mouseleave',()=>{
+        stars.forEach((s,i)=>s.classList.toggle('active',i<selectedRating));
+    });
+
+    document.getElementById('reviewForm').addEventListener('submit',async(e)=>{
+        e.preventDefault();
+        if(selectedRating===0){alert('Please select a star rating!');return;}
+        const review={name:document.getElementById('reviewName').value,rating:selectedRating,text:document.getElementById('reviewText').value,date:new Date().toISOString(),approved:false,id:Date.now()};
+        const pending=JSON.parse(localStorage.getItem('pendingReviews')||'[]');
+        pending.push(review);
+        localStorage.setItem('pendingReviews',JSON.stringify(pending));
+
+        const starText='⭐'.repeat(review.rating);
+        try {
+            await fetch(DISCORD_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({embeds:[{title:"⭐ New Review (Pending Approval)",color:16750848,fields:[
+                {name:"👤 From",value:review.name,inline:true},
+                {name:"⭐ Rating",value:starText,inline:true},
+                {name:"💬 Review",value:review.text},
+                {name:"🆔 ID",value:String(review.id),inline:true}
+            ],footer:{text:"Triple-click JumpingLury in footer → Admin Panel to approve"},timestamp:new Date().toISOString()}]})});
+        } catch(err){}
+
+        document.getElementById('reviewFormWrapper').style.display='none';
+        document.getElementById('reviewSuccess').style.display='block';
+        setTimeout(()=>{
+            document.getElementById('reviewFormWrapper').style.display='block';
+            document.getElementById('reviewSuccess').style.display='none';
+            document.getElementById('reviewForm').reset();
+            selectedRating=0;
+            stars.forEach(s=>s.classList.remove('active'));
+        },5000);
+    });
+    loadApprovedReviews();
+}
+
+function loadApprovedReviews() {
+    const approved=JSON.parse(localStorage.getItem('approvedReviews')||'[]');
+    const list=document.getElementById('reviewsList');
+    if(approved.length===0){list.innerHTML='<div class="no-reviews"><i class="fas fa-comment-dots" style="font-size:2rem;display:block;margin-bottom:10px;opacity:0.3;"></i>No reviews yet. Be the first to leave one!</div>';return;}
+    list.innerHTML=approved.map(r=>{
+        const starsHTML=Array(5).fill(0).map((_,i)=>`<i class="fas fa-star${i<r.rating?'':'" style="opacity:0.2'}"></i>`).join('');
+        const initials=r.name.substring(0,2).toUpperCase();
+        const date=new Date(r.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+        return `<div class="review-card"><div class="review-stars">${starsHTML}</div><p class="review-text">"${r.text}"</p><div class="review-author"><div class="review-avatar">${initials}</div><div class="review-author-info"><strong>${r.name}</strong><span>Verified Client</span></div></div><div class="review-date">${date}</div></div>`;
+    }).join('');
+}
+
+function initAdminPanel() {
+    let clickCount=0,clickTimer;
+    document.getElementById('adminTrigger').addEventListener('click',(e)=>{
+        e.preventDefault();clickCount++;clearTimeout(clickTimer);
+        clickTimer=setTimeout(()=>{clickCount=0;},1000);
+        if(clickCount>=3){clickCount=0;document.getElementById('adminPanel').classList.add('active');}
+    });
+}
+
+function loginAdmin() {
+    if(document.getElementById('adminPassword').value===ADMIN_PASSWORD){
+        document.getElementById('adminLogin').style.display='none';
+        document.getElementById('adminDashboard').style.display='block';
+        renderAdminReviews();
+    } else {
+        document.getElementById('adminError').style.display='block';
+        setTimeout(()=>document.getElementById('adminError').style.display='none',2000);
+    }
+}
+
+function closeAdmin() {
+    document.getElementById('adminPanel').classList.remove('active');
+    document.getElementById('adminLogin').style.display='block';
+    document.getElementById('adminDashboard').style.display='none';
+    document.getElementById('adminPassword').value='';
+    document.getElementById('adminError').style.display='none';
+}
+
+function renderAdminReviews() {
+    const pending=JSON.parse(localStorage.getItem('pendingReviews')||'[]');
+    const approved=JSON.parse(localStorage.getItem('approvedReviews')||'[]');
+    const pc=document.getElementById('pendingReviews');
+    const ac=document.getElementById('approvedReviews');
+    if(pending.length===0){pc.innerHTML='<div class="admin-empty">No pending reviews</div>';}
+    else{pc.innerHTML=pending.map(r=>`<div class="admin-review"><div class="admin-review-header"><div><strong>${r.name}</strong> — ${'⭐'.repeat(r.rating)}</div><div style="font-size:0.75rem;color:var(--text-muted);">${new Date(r.date).toLocaleDateString()}</div></div><p class="admin-review-text">"${r.text}"</p><div class="admin-btns"><button class="admin-btn admin-approve" onclick="approveReview(${r.id})"><i class="fas fa-check"></i> Approve</button><button class="admin-btn admin-reject" onclick="rejectReview(${r.id})"><i class="fas fa-times"></i> Reject</button></div></div>`).join('');}
+    if(approved.length===0){ac.innerHTML='<div class="admin-empty">No approved reviews yet</div>';}
+    else{ac.innerHTML=approved.map(r=>`<div class="admin-review" style="border-left:3px solid var(--success);"><div class="admin-review-header"><div><strong>${r.name}</strong> — ${'⭐'.repeat(r.rating)}</div><div style="font-size:0.75rem;color:var(--text-muted);">${new Date(r.date).toLocaleDateString()}</div></div><p class="admin-review-text">"${r.text}"</p><div class="admin-btns"><button class="admin-btn admin-reject" onclick="removeApproved(${r.id})"><i class="fas fa-trash"></i> Remove</button></div></div>`).join('');}
+}
+
+function approveReview(id) {
+    let pending=JSON.parse(localStorage.getItem('pendingReviews')||'[]');
+    const review=pending.find(r=>r.id===id);if(!review)return;
+    review.approved=true;
+    pending=pending.filter(r=>r.id!==id);
+    localStorage.setItem('pendingReviews',JSON.stringify(pending));
+    const approved=JSON.parse(localStorage.getItem('approvedReviews')||'[]');
+    approved.push(review);
+    localStorage.setItem('approvedReviews',JSON.stringify(approved));
+    renderAdminReviews();loadApprovedReviews();
+}
+
+function rejectReview(id) {
+    let pending=JSON.parse(localStorage.getItem('pendingReviews')||'[]');
+    pending=pending.filter(r=>r.id!==id);
+    localStorage.setItem('pendingReviews',JSON.stringify(pending));
+    renderAdminReviews();
+}
+
+function removeApproved(id) {
+    let approved=JSON.parse(localStorage.getItem('approvedReviews')||'[]');
+    approved=approved.filter(r=>r.id!==id);
+    localStorage.setItem('approvedReviews',JSON.stringify(approved));
+    renderAdminReviews();loadApprovedReviews();
+}
+
 function initActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            if (window.scrollY >= section.offsetTop - 100) {
-                current = section.getAttribute('id');
-            }
-        });
-        navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-        });
+    const sections=document.querySelectorAll('section[id]');
+    const navLinks=document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll',()=>{
+        let current='';
+        sections.forEach(s=>{if(window.scrollY>=s.offsetTop-100)current=s.getAttribute('id');});
+        navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+current));
     });
 }
 </script>
