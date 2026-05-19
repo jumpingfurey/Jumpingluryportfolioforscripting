@@ -1,1 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JumpingLury | Roblox Lua Scripter</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
 
+    <div id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-bracket">{</span> JumpingLury <span class="logo-bracket">}</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link">Hire Me</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-greeting">
+                    <span class="typing-prefix">></span>
+                    <span class="greeting-text">Hello, I'm</span>
+                </p>
+                <h1 class="hero-name">
+                    <span class="name-main">Jumping</span><span class="name-accent">Lury</span>
+                </h1>
+                <div class="hero-title-wrapper">
+                    <h2 class="hero-title">
+                        <span class="title-static">Roblox </span>
+                        <span class="title-dynamic" id="dynamicText"></span>
+                        <span class="cursor">|</span>
+                    </h2>
+                </div>
+                <p class="hero-description">
+                    Intermediate Lua Scripter with <strong>1 year of experience</strong> crafting
+                    gameplay systems, UI, and mechanics for Roblox games. Available for hire
+                    for your next project.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn btn-primary">
+                        <i class="fas fa-code"></i> View My Work
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Hire Me
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-target="1">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Year Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="15">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Projects Done</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-label">Happy Clients</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="code-filename">JumpingLury.lua</span>
+                    </div>
+                    <pre class="code-body"><code><span class="lua-keyword">local</span> <span class="lua-variable">Developer</span> = {
+    <span class="lua-key">Name</span> = <span class="lua-string">"JumpingLury"</span>,
+    <span class="lua-key">Level</span> = <span class="lua-string">"Intermediate"</span>,
+    <span class="lua-key">Experience</span> = <span class="lua-string">"1 Year"</span>,
+    <span class="lua-key">Language</span> = <span class="lua-string">"Luau / Lua"</span>,
+    <span class="lua-key">Available</span> = <span class="lua-boolean">true</span>,
+}
+
+<span class="lua-keyword">function</span> <span class="lua-function">Developer:GetHired</span>(<span class="lua-param">project</span>)
+    <span class="lua-keyword">if</span> <span class="lua-variable">self</span>.Available <span class="lua-keyword">then</span>
+        <span class="lua-builtin">print</span>(<span class="lua-string">"Let's build!"</span>)
+        <span class="lua-keyword">return</span> <span class="lua-boolean">true</span>
+    <span class="lua-keyword">end</span>
+<span class="lua-keyword">end</span></code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <p>Scroll Down</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// ABOUT ME</span>
+                <h2 class="section-title">Who Is <span class="highlight">JumpingLury</span>?</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="about-avatar">
+                        <div class="avatar-ring"></div>
+                        <div class="avatar-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                    </div>
+                    <div class="experience-badge">
+                        <span class="exp-number">1</span>
+                        <span class="exp-text">Year<br>Exp.</span>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>Roblox Lua Scripter & Game Developer</h3>
+                    <p>
+                        Hey there! I'm <strong>JumpingLury</strong>, an intermediate Roblox Lua scripter
+                        with <strong>1 year of hands-on experience</strong>. I specialize in creating clean,
+                        efficient scripts for Roblox games — from gameplay mechanics and UI systems to
+                        data stores and interactive elements.
+                    </p>
+                    <p>
+                        I love taking on <strong>less complex but meaningful projects</strong> and delivering
+                        quality work at affordable rates. Whether you need a combat system, a shop GUI,
+                        NPC behavior, or game logic — I've got you covered.
+                    </p>
+                    <div class="about-details">
+                        <div class="detail-item">
+                            <i class="fas fa-user"></i>
+                            <span><strong>Name:</strong> JumpingLury</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-layer-group"></i>
+                            <span><strong>Level:</strong> Intermediate</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span><strong>Experience:</strong> 1 Year</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><strong>Status:</strong> Available for Hire</span>
+                        </div>
+                    </div>
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Get In Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// MY SKILLS</span>
+                <h2 class="section-title">What I <span class="highlight">Know</span></h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <h3>Luau / Lua Scripting</h3>
+                    <p>Writing clean, efficient Lua code for Roblox games including server and client scripts.</p>
+                    <div class="skill-bar">
+                        <div class="skill-fill" data-width="70%"><span>70%</span></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-desktop"></i></div>
+                    <h3>UI / GUI Design</h3>
+                    <p>Creating interactive and visually appealing user interfaces with scripted functionality.</p>
+                    <div class="skill-bar">
+                        <div class="skill-fill" data-width="65%"><span>65%</span></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-database"></i></div>
+                    <h3>DataStore Systems</h3>
+                    <p>Implementing save/load systems using Roblox DataStores to persist player data.</p>
+                    <div class="skill-bar">
+                        <div class="skill-fill" data-width="60%"><span>60%</span></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-crosshairs"></i></div>
+                    <h3>Game Mechanics</h3>
+                    <p>Building combat systems, tools, abilities, and core gameplay loops.</p>
+                    <div class="skill-bar">
+                        <div class="skill-fill" data-width="72%"><span>72%</span></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                    <h3>NPC / AI Behavior</h3>
+                    <p>Scripting NPC pathfinding, interactions, enemies, and simple AI behavior trees.</p>
+                    <div class="skill-bar">
+                        <div class="skill-fill" data-width="55%"><span>55%</span></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-server"></i></div>
+                    <h3>Client-Server Architecture</h3>
+                    <p>Understanding RemoteEvents, RemoteFunctions, and proper network security practices.</p>
+                    <div class="skill-bar">
+                        <div class="skill-fill" data-width="62%"><span>62%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// MY WORK</span>
+                <h2 class="section-title">Project <span class="highlight">Portfolio</span></h2>
+                <div class="title-underline"></div>
+                <p class="section-subtitle">Check out clips and showcases of my previous work</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="mechanics">Mechanics</button>
+                <button class="filter-btn" data-filter="ui">UI / GUI</button>
+                <button class="filter-btn" data-filter="systems">Systems</button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid" id="portfolioGrid">
+
+                <!-- Video 1 -->
+                <div class="portfolio-item" data-category="mechanics">
+                    <div class="portfolio-card">
+                        <div class="portfolio-media streamable-embed">
+                            <div class="video-wrapper">
+                                <iframe
+                                    src="https://streamable.com/e/wvg1iu"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    allow="autoplay">
+                                </iframe>
+                            </div>
+                            <span class="portfolio-badge">Video Clip</span>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Project Showcase #1</h3>
+                            <p>Demonstrating custom scripted mechanics and gameplay systems built in Roblox Studio.</p>
+                            <div class="portfolio-tags">
+                                <span>Lua</span>
+                                <span>Mechanics</span>
+                                <span>Roblox</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="portfolio-item" data-category="systems">
+                    <div class="portfolio-card">
+                        <div class="portfolio-media streamable-embed">
+                            <div class="video-wrapper">
+                                <iframe
+                                    src="https://streamable.com/e/kpvx5j"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    allow="autoplay">
+                                </iframe>
+                            </div>
+                            <span class="portfolio-badge">Video Clip</span>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Project Showcase #2</h3>
+                            <p>A scripted system showcase featuring clean code implementation and smooth functionality.</p>
+                            <div class="portfolio-tags">
+                                <span>Lua</span>
+                                <span>Systems</span>
+                                <span>Roblox</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coming Soon -->
+                <div class="portfolio-item" data-category="ui">
+                    <div class="portfolio-card coming-soon-card">
+                        <div class="portfolio-media coming-soon-media">
+                            <div class="coming-soon-content">
+                                <i class="fas fa-plus-circle"></i>
+                                <h4>More Coming Soon</h4>
+                                <p>New projects being added regularly</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Future Project</h3>
+                            <p>More work samples will be added here as I complete new commissions and projects.</p>
+                            <div class="portfolio-tags">
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Full Showcase Section -->
+            <div class="video-showcase-section">
+                <h3 class="showcase-title">
+                    <i class="fas fa-film"></i> Full Video Showcases
+                </h3>
+                <p class="showcase-subtitle">Watch my work in action — click play to view</p>
+                <div class="showcase-grid">
+                    <div class="showcase-card">
+                        <div class="showcase-video">
+                            <div class="video-wrapper">
+                                <iframe
+                                    src="https://streamable.com/e/wvg1iu"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    allow="autoplay">
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="showcase-info">
+                            <h4>Showcase #1 — Full Demo</h4>
+                            <p>Full walkthrough of scripted mechanics in action</p>
+                        </div>
+                    </div>
+                    <div class="showcase-card">
+                        <div class="showcase-video">
+                            <div class="video-wrapper">
+                                <iframe
+                                    src="https://streamable.com/e/kpvx5j"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    allow="autoplay">
+                                </iframe>
+                            </div>
+                        </div>
+                        <div class="showcase-info">
+                            <h4>Showcase #2 — Full Demo</h4>
+                            <p>Complete demonstration of systems and scripting</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// SERVICES</span>
+                <h2 class="section-title">What I <span class="highlight">Offer</span></h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Game Mechanics</h3>
+                    <p>Combat systems, tools, abilities, movement mechanics, and gameplay loops.</p>
+                    <div class="service-price">Starting at <strong>$5–15</strong></div>
+                </div>
+                <div class="service-card featured">
+                    <div class="service-badge">Popular</div>
+                    <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>UI / GUI Scripting</h3>
+                    <p>Interactive menus, shops, inventories, HUDs, and animated interfaces.</p>
+                    <div class="service-price">Starting at <strong>$5–20</strong></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-save"></i></div>
+                    <h3>Data Systems</h3>
+                    <p>Save systems, leaderboards, player stats, and DataStore integration.</p>
+                    <div class="service-price">Starting at <strong>$5–15</strong></div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bug"></i></div>
+                    <h3>Bug Fixes & Tweaks</h3>
+                    <p>Debugging existing scripts, optimizing code, and fixing broken systems.</p>
+                    <div class="service-price">Starting at <strong>$3–10</strong></div>
+                </div>
+            </div>
+            <div class="services-note">
+                <i class="fas fa-info-circle"></i>
+                <p>I specialize in <strong>less complex projects</strong> — perfect for indie devs, small teams, or anyone needing quality work at affordable prices. Prices are flexible and depend on complexity!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// FEEDBACK</span>
+                <h2 class="section-title">Client <span class="highlight">Reviews</span></h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="testimonials-slider" id="testimonialsSlider">
+                <div class="testimonial-card active">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"JumpingLury delivered exactly what I needed for my obby game. Clean code, fast delivery. Will hire again!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C1</div>
+                        <div>
+                            <strong>Client #1</strong>
+                            <span>Roblox Game Dev</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"Great communication and the shop system works perfectly. Very affordable and professional for the price."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C2</div>
+                        <div>
+                            <strong>Client #2</strong>
+                            <span>Studio Owner</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"Helped me fix so many bugs in my game. Patient, skilled, and easy to work with. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C3</div>
+                        <div>
+                            <strong>Client #3</strong>
+                            <span>Indie Developer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-dots" id="sliderDots">
+                <button class="dot active" data-index="0"></button>
+                <button class="dot" data-index="1"></button>
+                <button class="dot" data-index="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">// HIRE ME</span>
+                <h2 class="section-title">Let's <span class="highlight">Work Together</span></h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Ready to bring your Roblox game to life? Send me a message and let's discuss your project!</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon"><i class="fab fa-discord"></i></div>
+                            <div>
+                                <strong>Discord</strong>
+                                <p>JumpingLury</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon"><i class="fab fa-roblox"></i></div>
+                            <div>
+                                <strong>Roblox</strong>
+                                <p>JumpingLury</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <strong>Email</strong>
+                                <p>jumpinglury@email.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <div class="method-icon"><i class="fab fa-twitter"></i></div>
+                            <div>
+                                <strong>Twitter / X</strong>
+                                <p>@JumpingLury</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="What's your name?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="discord">Your Discord</label>
+                        <input type="text" id="discord" name="discord" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectType">Project Type</label>
+                        <select id="projectType" name="projectType" required>
+                            <option value="" disabled selected>Select a project type</option>
+                            <option value="mechanics">Game Mechanics</option>
+                            <option value="ui">UI / GUI</option>
+                            <option value="data">Data Systems</option>
+                            <option value="bugfix">Bug Fixes</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Budget Range</label>
+                        <select id="budget" name="budget" required>
+                            <option value="" disabled selected>Select your budget</option>
+                            <option value="5-10">$5 – $10</option>
+                            <option value="10-25">$10 – $25</option>
+                            <option value="25-50">$25 – $50</option>
+                            <option value="50+">$50+</option>
+                            <option value="negotiate">Let's Negotiate</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3><span class="logo-bracket">{</span> JumpingLury <span class="logo-bracket">}</span></h3>
+                    <p>Intermediate Roblox Lua Scripter</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 JumpingLury. All rights reserved. Built with <i class="fas fa-heart" style="color:#e74c3c;"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
